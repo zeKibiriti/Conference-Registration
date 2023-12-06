@@ -1,7 +1,7 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
-import ConferenceRegistration from "@/components/ConferenceRegistration";
 import SlideshowPage from "@/components/SlideshowPage";
+import ConferenceRegistration from "@/components/ConferenceRegistration";
 
 const routes = [
   {
@@ -18,6 +18,11 @@ const routes = [
       },
     ],
   },
+  // {
+  //   path: '/test-page',
+  //   name: "TEST",
+  //   component: TestPage
+  // },
   {
     path: '/registration-page',
     name: "Conference Registration",

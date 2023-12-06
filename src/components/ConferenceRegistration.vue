@@ -1,56 +1,49 @@
 <template>
-  <v-container>
-    <!-- Center-aligned v-row -->
-    <v-card
-      class="mx-auto"
-      width="800"
-      prepend-icon="mdi-home"
-    >
+  <v-app>
+    <v-container>
+      <v-card
+        class="mx-auto"
+        width="800"
+        prepend-icon="mdi-home"
+        >
+
       <template v-slot:title>
-        Select Category you want to Register
+        Select Category to Register
       </template>
-    <v-row class="text-center">
-      <v-col>
-        <!-- Horizontal line (hr) -->
-        <hr>
 
-        <v-card-text>
-          <v-row style="margin-left: 48%"><h4>Categories</h4>
-          </v-row>
-        <!-- v-radio-group -->
-<!--        <v-radio-group v-model="inline" inline @change="handleRadioChange">-->
-          <!-- Radio buttons -->
-          <v-col style="text-align: center">
-            <v-radio-group
-              @change="handleRadioChange"
-              style="margin-left: 35%"
-              v-model="inline"
-              inline
-            >
-              <v-radio
-                label="Individual"
-                value="Individual"
-              ></v-radio>
-              <v-radio
-                label="Booth"
-                value="Booth"
-              ></v-radio>
-              <v-radio
-                label="Forum"
-                value="Forum"
-              ></v-radio>
-            </v-radio-group>
-          </v-col>
-<!--          <v-radio label="Option 1" value="option1"></v-radio>-->
-<!--          <v-radio label="Option 2" value="option2"></v-radio>-->
-<!--        </v-radio-group>-->
-        </v-card-text>
-      </v-col>
-    </v-row>
+      <v-row class="text-center">
+        <v-col>
+          <!-- Horizontal line (hr) -->
+          <hr>
 
-    <!-- Your dialog -->
-<!--    <v-dialog v-model="dialog">-->
-      <v-dialog v-model="dialogs.Individual" max-width="800px">
+          <v-card-text>
+            <v-row style="margin-left: 48%"><h4>Categories</h4>
+            </v-row>
+            <v-col style="text-align: center">
+              <v-radio-group
+                @change="handleRadioChange"
+                style="margin-left: 35%"
+                v-model="inline"
+                inline
+              >
+                <v-radio
+                  label="Individual"
+                  value="Individual"
+                ></v-radio>
+                <v-radio
+                  label="Booth"
+                  value="Booth"
+                ></v-radio>
+                <v-radio
+                  label="Forum"
+                  value="Forum"
+                ></v-radio>
+              </v-radio-group>
+            </v-col>
+          </v-card-text>
+        </v-col>
+      </v-row>
+      <v-dialog v-model="modalVisible" max-width="800px">
         <v-card>
           <h3 style="text-align: center; margin-top: 20px">Conference Registration Form</h3>
           <!-- Form Content -->
@@ -60,7 +53,7 @@
               <v-row align="center" justify="center">
                 <v-col cols="12" md="6">
                   <v-select
-                    v-model="selectedItem"
+                    v-model="selectedCategoryItem"
                     :items="['Student', 'Non Student']"
                     label="Select Category"
                   >
@@ -190,112 +183,83 @@
             </v-container>
           </v-form>
         </v-card>
+<!--        <v-card>-->
+<!--          <v-card-title>Modal Title</v-card-title>-->
+<!--          <v-card-text>-->
+<!--            &lt;!&ndash; Modal content goes here &ndash;&gt;-->
+<!--            This is the content of the modal.-->
+<!--          </v-card-text>-->
+<!--          <v-card-actions>-->
+<!--            <v-btn @click="closeModal">Close</v-btn>-->
+<!--          </v-card-actions>-->
+<!--        </v-card>-->
       </v-dialog>
-      <!-- Dialog content goes here -->
-<!--    </v-dialog>-->
-    </v-card>
-  </v-container>
+      </v-card>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      inline: null,
-      Individual: null,
-      Booth: null,
-      Forum: null,
-      dialogs: {
-        Individual: false,
-        Booth: false,
-        Forum: false,
-      }
+      valid: true,
+      inline: true,
+      selectedOption: null,
+      modalVisible: false,
+      selectedItem: null,
+      selectedCategoryItem: null,
+      column: null,
+      firstname: '',
+      middlename: '',
+      lastname: '',
+      email: '',
+      emailRules: [
+        (v) => !!v || 'Email is required',
+        (v) => /.+@.+\..+/.test(v) || 'Email must be valid',
+      ],
+      phoneNumber: '',
+      phoneRules: [
+        (v) => !!v || 'Phone number is required',
+        (v) => /^\d{10}$/.test(v) || 'Phone number must be 10 digits',
+      ],
+      description: '',
+      nameRules: [],
     };
   },
   methods: {
-  //   handleRadioChange(option) {
-  //     // Logic to open or close the dialog based on the selected radio button
-  //     if (this[option] === 'Individual' || this[option] === 'Booth' || this[option] === 'Forum') {
-  //       this.dialogs[option] = true; // Open the dialog
-  //     } else {
-  //       this.dialogs[option] = false; // Close the dialog
-  //     }
-  //   }
-  // }
     handleRadioChange() {
-      console.log('Hello:', this.dialogs)
-      // Logic to open or close the dialog based on the selected radio button
-      if (this.dialogs.Individual === 'Individual') {
-        this.dialog = true; // Open the dialog
-      } else if (this.dialogs.Booth === 'Booth') {
-        this.dialog = true; // Open the dialog
-      }
-      else this.dialog = this.dialogs.Forum === 'Forum';
-    }
-  }
+      // Show the modal when a radio button is selected
+      this.modalVisible = true;
+    },
+    closeModal() {
+      // Close the modal
+      this.modalVisible = false;
+    },
+    submitForm() {
+      // Your form submission logic here
+    },
+    resetForm() {
+      // Reset form fields
+      this.firstname = '';
+      this.middlename = '';
+      this.lastname = '';
+      this.email = '';
+      this.phoneNumber = '';
+      this.description = '';
+      // Reset validation state if using validation
+      this.$refs.submitForm?.resetValidation(); // Replace "form" with the ref attribute of your form element
+    },
+    clearSelection() {
+      this.selectedItem = null;
+    },
+    cancelForm() {
+      // Handle cancel logic
+      this.dialog = false;
+    },
+    formatPhoneNumber() {
+      // Handle phone number formatting logic
+    },
+  },
 };
 </script>
-
-
-<!--<template>-->
-<!--  <v-card-->
-<!--    class="mx-auto"-->
-<!--    width="800"-->
-<!--    prepend-icon="mdi-home"-->
-<!--  >-->
-<!--    <template v-slot:title>-->
-<!--      Select Category you want to Register-->
-<!--    </template>-->
-
-<!--    <v-card-text>-->
-<!--      <v-row style="margin-left: 48%"><h4>Categories</h4>-->
-<!--      </v-row>-->
-<!--      <v-row>-->
-<!--        <v-col style="text-align: center">-->
-<!--        <v-radio-group-->
-<!--          style="margin-left: 35%"-->
-<!--          @change="handleRadioChange"-->
-<!--          v-model="inline"-->
-<!--          inline-->
-<!--        >-->
-<!--          <v-radio-->
-<!--            label="Individual"-->
-<!--            value="Individual"-->
-<!--          ></v-radio>-->
-<!--          <v-radio-->
-<!--            label="Booth"-->
-<!--            value="Booth"-->
-<!--          ></v-radio>-->
-<!--          <v-radio-->
-<!--            label="Forum"-->
-<!--            value="Forum"-->
-<!--          ></v-radio>-->
-<!--        </v-radio-group>-->
-<!--        </v-col>-->
-<!--      </v-row>-->
-<!--    </v-card-text>-->
-<!--  </v-card>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--export default {-->
-<!--  data () {-->
-<!--    return {-->
-<!--      column: null,-->
-<!--      inline: null,-->
-<!--      dialog: false-->
-<!--    };-->
-<!--  },-->
-<!--  methods: {-->
-<!--    handleRadioChange() {-->
-<!--      // Logic to open or close the dialog based on the selected radio button-->
-<!--      if (this.inline === 'Individual') {-->
-<!--        this.dialog = true; // Open the dialog-->
-<!--      } else {-->
-<!--        this.dialog = false; // Close the dialog-->
-<!--      }-->
-<!--    }-->
-<!--  }-->
-<!--};-->
-<!--}-->
-<!--</script>-->
