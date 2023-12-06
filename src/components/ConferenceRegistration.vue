@@ -51,9 +51,9 @@
             <v-container fluid fill-height>
               <!-- Select Category -->
               <v-row align="center" justify="center">
-                <v-col cols="12" md="6">
+                <v-col cols="12" md="4">
                   <v-select
-                    v-model="selectedCategoryItem"
+                    v-model="category"
                     :items="['Student', 'Non Student']"
                     label="Select Category"
                   >
@@ -63,9 +63,9 @@
                   </v-select>
                 </v-col>
 
-                <v-col cols="12" md="6">
+                <v-col cols="12" md="4">
                   <v-select
-                    v-model="selectedItem"
+                    v-model="country"
                     :items="['Tanzania', 'Kenya', 'Uganda']"
                     label="Select Country"
                   >
@@ -74,25 +74,19 @@
                     </template>
                   </v-select>
                 </v-col>
-              </v-row>
-              <v-row>
-                <h4>Gender</h4>
-                <hr>
-                <v-radio-group
-                  v-model="inline"
-                  inline
-                >
-                  <v-radio
-                    label="Male"
-                    value="Male"
-                  ></v-radio>
-                  <v-radio
-                    label="Female"
-                    value="Female"
-                  ></v-radio>
-                </v-radio-group>
-              </v-row>
 
+                <v-col cols="12" md="4">
+                  <v-select
+                    v-model="gender"
+                    :items="['Male', 'Female']"
+                    label="Select Gender"
+                  >
+                    <template #append-outer>
+                      <v-icon @click="clearSelection">mdi-close-circle</v-icon>
+                    </template>
+                  </v-select>
+                </v-col>
+              </v-row>
               <!-- Name Fields -->
               <v-row align="center" justify="center">
                 <v-col cols="12" md="4">
@@ -155,7 +149,7 @@
 
               <!-- Description Field -->
               <v-row align="center" justify="center">
-                <v-col cols="12" md="12">
+                <v-col cols="6" md="12">
                   <v-textarea
                     v-model="description"
                     :counter="300"
@@ -169,7 +163,7 @@
               <v-row class="mt-4">
                 <!-- Cancel Button -->
                 <v-col>
-                  <v-btn @click="cancelForm">Cancel</v-btn>
+                  <v-btn @click="closeModal">Cancel</v-btn>
                 </v-col>
                 <!-- Reset Button -->
                 <v-col>
@@ -207,7 +201,10 @@ export default {
       inline: true,
       selectedOption: null,
       modalVisible: false,
-      selectedItem: null,
+      country: null,
+      category: null,
+      gender: null,
+      selectedGender: null,
       selectedCategoryItem: null,
       column: null,
       firstname: '',
@@ -241,6 +238,9 @@ export default {
     },
     resetForm() {
       // Reset form fields
+      this.country = '';
+      this.category = '';
+      this.gender = '';
       this.firstname = '';
       this.middlename = '';
       this.lastname = '';
@@ -251,7 +251,7 @@ export default {
       this.$refs.submitForm?.resetValidation(); // Replace "form" with the ref attribute of your form element
     },
     clearSelection() {
-      this.selectedItem = null;
+      this.category = null;
     },
     cancelForm() {
       // Handle cancel logic
