@@ -1,21 +1,28 @@
 <template>
-  <div id="app">
-    <div class="navLink col-3">
-      <router-link class="link" to="/home-page">Home</router-link>
-      <router-link class="link" to="/registration-page" style="color: red">Conference Registration</router-link>
-      <router-link class="link" to="/navigation-page" style="color: red">Navigation</router-link>
-<!--      <router-link class="link" to="/about">About</router-link>-->
-<!--      <router-link class="link" to="/movies">Movies</router-link>-->
-<!--      <router-link class="link" to="/actors">Actors</router-link>-->
-<!--      <router-link class="link" to="/profile">Profile</router-link>-->
-    </div>
-  </div>
+  <v-app-bar app height="180" color="#64B5F6">
+    <v-btn class="color-app" icon @click="goHome">
+      <v-icon>mdi-home</v-icon>
+    </v-btn>
+    <v-toolbar-title class="color-app">Conference Portal</v-toolbar-title>
+
+    <!-- Align buttons to the right -->
+    <v-spacer></v-spacer>
+
+    <!-- Two text buttons aligned on the right -->
+    <v-btn class="color-app" text @click="handleButtonClick1">Register</v-btn>
+    <v-btn text @click="handleButtonClick2"></v-btn>
+  </v-app-bar>
   <router-view></router-view>
 </template>
 
 <script>
 export default {
   name: "App",
+};
+
+const goHome = () => {
+  // Add logic to navigate home
+  console.log("Go home action");
 };
 </script>
 
@@ -35,62 +42,7 @@ export default {
   background-color: red;
   color: white;
 }
+.color-app {
+  color: white;
+}
 </style>
-
-
-
-
-
-<!--<template>-->
-<!--  <div id="app">-->
-<!--    <div class="navLink col-3">-->
-<!--  <v-app-bar-->
-<!--    height="100"-->
-<!--    color="gray"-->
-<!--    icon="mdi-information"-->
-<!--    :border="false"-->
-<!--    :outlined="false"-->
-<!--    dense-->
-<!--  >-->
-
-<!--&lt;!&ndash;    <v-img&ndash;&gt;-->
-<!--&lt;!&ndash;      src="../../../hssrcbanner.jpg"&ndash;&gt;-->
-<!--&lt;!&ndash;      absolute&ndash;&gt;-->
-<!--&lt;!&ndash;      top="0"&ndash;&gt;-->
-<!--&lt;!&ndash;      left="0"&ndash;&gt;-->
-<!--&lt;!&ndash;      right="0"&ndash;&gt;-->
-<!--&lt;!&ndash;      bottom="0"&ndash;&gt;-->
-<!--&lt;!&ndash;      style="width: 200%; height: 100%;"&ndash;&gt;-->
-<!--&lt;!&ndash;    ></v-img>&ndash;&gt;-->
-
-<!--    <router-link to="/registration-page" style="color: red">Conference Registration</router-link>-->
-<!--    <div class="flex-grow-1" style="z-index: -1;"></div>-->
-<!--  </v-app-bar>-->
-<!--    </div>-->
-<!--&lt;!&ndash;    <router-view></router-view>&ndash;&gt;-->
-<!--  </div>-->
-<!--</template>-->
-
-<!--<script>-->
-
-<!--import RegistForm from "@/components/RegistForm";-->
-
-<!--export default {-->
-<!--  components: {-->
-<!--    RegistForm,-->
-<!--  },-->
-<!--  methods: {-->
-<!--    openDialog() {-->
-<!--      // Set the 'dialog' data property in DialogComponent to true-->
-<!--      this.$refs.RegistForm.dialog = true;-->
-<!--    },-->
-<!--  },-->
-<!--};-->
-<!--</script>-->
-
-<!--<style>-->
-<!--/* Additional styles as needed */-->
-<!--</style>-->
-
-
-
