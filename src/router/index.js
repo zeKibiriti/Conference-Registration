@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import SlideshowPage from "@/components/SlideshowPage";
 import ConferenceRegistration from "@/components/ConferenceRegistration";
+import Navigation from "@/components/Navigation";
 
 const routes = [
   {
@@ -32,6 +33,12 @@ const routes = [
     path: '/home-page',
     name: "Home",
     component: SlideshowPage
+  },
+
+  {
+    path: '/navigation-page',
+    name: "Navigation",
+    component: Navigation
   },
 ]
 

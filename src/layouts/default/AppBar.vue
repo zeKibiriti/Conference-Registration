@@ -2,15 +2,15 @@
   <div id="app">
     <div class="navLink col-3">
       <router-link class="link" to="/home-page">Home</router-link>
-<!--      <router-link class="link" to="/test-page">Test</router-link>-->
       <router-link class="link" to="/registration-page" style="color: red">Conference Registration</router-link>
+      <router-link class="link" to="/navigation-page" style="color: red">Navigation</router-link>
 <!--      <router-link class="link" to="/about">About</router-link>-->
 <!--      <router-link class="link" to="/movies">Movies</router-link>-->
 <!--      <router-link class="link" to="/actors">Actors</router-link>-->
 <!--      <router-link class="link" to="/profile">Profile</router-link>-->
     </div>
-    <router-view></router-view>
   </div>
+  <router-view></router-view>
 </template>
 
 <script>
