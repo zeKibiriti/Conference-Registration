@@ -4,7 +4,6 @@
       <v-card
         class="mx-auto"
         width="800"
-        prepend-icon="mdi-home"
         >
 
       <template v-slot:title>
@@ -188,6 +187,17 @@
 <!--          </v-card-actions>-->
 <!--        </v-card>-->
       </v-dialog>
+          <div>
+        <h4>PHC Registration Fees</h4>
+            <ol style="text-align: left; margin-left: 50px; margin-bottom: 50px">
+              <li>Health Worker - 100,000 Tsh</li>
+              <li>University Student - 100,000 Tsh</li>
+              <li>Non-Student - 150,000 Tsh</li>
+              <li>Foreigner/International - £USD 100</li>
+              <li>Booth - 2,000,000 Tsh</li>
+              <li>Forum - 10,000,000 Tsh</li>
+            </ol>
+          </div>
       </v-card>
     </v-container>
   </v-app>
