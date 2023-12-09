@@ -2,11 +2,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import SlideshowPage from "@/components/SlideshowPage";
 import ConferenceRegistration from "@/components/ConferenceRegistration";
+import About from "@/components/About";
 
 const routes = [
   {
     path: '/',
     component: () => import('@/layouts/default/Default.vue'),
+
+    
     children: [
       {
         path: '',
@@ -16,18 +19,19 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () => import('@/views/Home.vue'),
       },
+      {
+        path: '/registration-page',
+        name: "Conference Registration",
+        component: ConferenceRegistration
+      },
+      {
+        path: '/about-page',
+        name: "Conference About",
+        component: About
+      },
     ],
   },
-  // {
-  //   path: '/test-page',
-  //   name: "TEST",
-  //   component: TestPage
-  // },
-  {
-    path: '/registration-page',
-    name: "Conference Registration",
-    component: ConferenceRegistration
-  },
+ 
   {
     path: '/home-page',
     name: "Home",

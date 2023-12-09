@@ -1,24 +1,17 @@
 <template>
-  <v-app>
-    <v-container>
-      <v-card
-        class="mx-auto"
-        width="800"
-        prepend-icon="mdi-home"
-        >
-
-      <template v-slot:title>
-        Select Category to Register
-      </template>
+  <v-container class="mt-12">
+    <v-card flat class="mx-auto" width="800">
+      <span class="grey--text"
+        ><h2 class="color-title">Select Category to Register</h2></span
+      >
 
       <v-row class="text-center">
         <v-col>
           <!-- Horizontal line (hr) -->
-          <hr>
+          <hr />
 
-          <v-card-text>
-            <v-row style="margin-left: 48%"><h4>Categories</h4>
-            </v-row>
+          <v-card-text class="pa-10">
+            <v-row style="margin-left: 48%"><h4>Categories</h4> </v-row>
             <v-col style="text-align: center">
               <v-radio-group
                 @change="handleRadioChange"
@@ -26,18 +19,9 @@
                 v-model="inline"
                 inline
               >
-                <v-radio
-                  label="Individual"
-                  value="Individual"
-                ></v-radio>
-                <v-radio
-                  label="Booth"
-                  value="Booth"
-                ></v-radio>
-                <v-radio
-                  label="Forum"
-                  value="Forum"
-                ></v-radio>
+                <v-radio label="Individual" value="Individual"></v-radio>
+                <v-radio label="Booth" value="Booth"></v-radio>
+                <v-radio label="Forum" value="Forum"></v-radio>
               </v-radio-group>
             </v-col>
           </v-card-text>
@@ -45,7 +29,9 @@
       </v-row>
       <v-dialog v-model="modalVisible" max-width="800px">
         <v-card>
-          <h3 style="text-align: center; margin-top: 20px">Conference Registration Form</h3>
+          <h3 style="text-align: center; margin-top: 20px">
+            Conference Registration Form
+          </h3>
           <!-- Form Content -->
           <v-form v-model="valid" @submit.prevent="submitForm">
             <v-container fluid fill-height>
@@ -177,20 +163,19 @@
             </v-container>
           </v-form>
         </v-card>
-<!--        <v-card>-->
-<!--          <v-card-title>Modal Title</v-card-title>-->
-<!--          <v-card-text>-->
-<!--            &lt;!&ndash; Modal content goes here &ndash;&gt;-->
-<!--            This is the content of the modal.-->
-<!--          </v-card-text>-->
-<!--          <v-card-actions>-->
-<!--            <v-btn @click="closeModal">Close</v-btn>-->
-<!--          </v-card-actions>-->
-<!--        </v-card>-->
+        <!--        <v-card>-->
+        <!--          <v-card-title>Modal Title</v-card-title>-->
+        <!--          <v-card-text>-->
+        <!--            &lt;!&ndash; Modal content goes here &ndash;&gt;-->
+        <!--            This is the content of the modal.-->
+        <!--          </v-card-text>-->
+        <!--          <v-card-actions>-->
+        <!--            <v-btn @click="closeModal">Close</v-btn>-->
+        <!--          </v-card-actions>-->
+        <!--        </v-card>-->
       </v-dialog>
-      </v-card>
-    </v-container>
-  </v-app>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -207,20 +192,20 @@ export default {
       selectedGender: null,
       selectedCategoryItem: null,
       column: null,
-      firstname: '',
-      middlename: '',
-      lastname: '',
-      email: '',
+      firstname: "",
+      middlename: "",
+      lastname: "",
+      email: "",
       emailRules: [
-        (v) => !!v || 'Email is required',
-        (v) => /.+@.+\..+/.test(v) || 'Email must be valid',
+        (v) => !!v || "Email is required",
+        (v) => /.+@.+\..+/.test(v) || "Email must be valid",
       ],
-      phoneNumber: '',
+      phoneNumber: "",
       phoneRules: [
-        (v) => !!v || 'Phone number is required',
-        (v) => /^\d{10}$/.test(v) || 'Phone number must be 10 digits',
+        (v) => !!v || "Phone number is required",
+        (v) => /^\d{10}$/.test(v) || "Phone number must be 10 digits",
       ],
-      description: '',
+      description: "",
       nameRules: [],
     };
   },
@@ -238,15 +223,15 @@ export default {
     },
     resetForm() {
       // Reset form fields
-      this.country = '';
-      this.category = '';
-      this.gender = '';
-      this.firstname = '';
-      this.middlename = '';
-      this.lastname = '';
-      this.email = '';
-      this.phoneNumber = '';
-      this.description = '';
+      this.country = "";
+      this.category = "";
+      this.gender = "";
+      this.firstname = "";
+      this.middlename = "";
+      this.lastname = "";
+      this.email = "";
+      this.phoneNumber = "";
+      this.description = "";
       // Reset validation state if using validation
       this.$refs.submitForm?.resetValidation(); // Replace "form" with the ref attribute of your form element
     },
@@ -263,3 +248,9 @@ export default {
   },
 };
 </script>
+<style>
+/* Add your custom styles here */
+.color-title {
+  color: grey;
+}
+</style>

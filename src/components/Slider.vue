@@ -1,5 +1,5 @@
 <template>
-  <v-container class="fill-height">
+  <v-container class="mt-10">
     <!--    Sliders Starts here-->
     <v-carousel>
       <v-carousel-item src="1.jpg" cover></v-carousel-item>
