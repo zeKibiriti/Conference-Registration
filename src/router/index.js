@@ -3,13 +3,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import SlideshowPage from "@/components/SlideshowPage";
 import ConferenceRegistration from "@/components/ConferenceRegistration";
 import About from "@/components/About";
+import Authentication from "@/components/Authentication"
 
 const routes = [
   {
     path: '/',
     component: () => import('@/layouts/default/Default.vue'),
 
-    
+
     children: [
       {
         path: '',
@@ -29,9 +30,14 @@ const routes = [
         name: "Conference About",
         component: About
       },
+      {
+        path: '/authentication',
+        name: "Login",
+        component: Authentication
+      },
     ],
   },
- 
+
   {
     path: '/home-page',
     name: "Home",

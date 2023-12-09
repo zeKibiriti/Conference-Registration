@@ -27,6 +27,55 @@
           </v-card-text>
         </v-col>
       </v-row>
+      <!-- Horizontal line (hr) -->
+      <hr />
+      <div style="background-color: gray; ruby-position: under">
+        <table>
+          <thead class="custom-th">
+          <tr>
+            <th>S/No</th>
+            <th>Category Name</th>
+            <th>Fees</th>
+          </tr>
+          </thead>
+<!--          <hr />-->
+          <tbody>
+          <tr>
+            <td>1.</td>
+              <td>Health Worker</td>
+            <td>100,000 TShs.</td>
+          </tr>
+          <tr>
+            <td>2.</td>
+              <td>University Student</td>
+              <td>100,000 TShs.</td>
+          </tr>
+          <tr>
+            <td>3.</td>
+            <td>Non student</td>
+            <td>150,000 TShs.</td>
+          </tr>
+          <tr>
+            <td>4.</td>
+            <td>Foreigner/international</td>
+            <td>£USD 100</td>
+          </tr>
+          <tr>
+            <td>5.</td>
+            <td>Booth</td>
+            <td>2,000,000 TSh.</td>
+          </tr>
+          <tr>
+            <td>6.</td>
+            <td>Forum</td>
+            <td>10,000,000 TSh.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Horizontal line (hr) -->
+      <hr />
+<!--      <h4>HELLO</h4>-->
       <v-dialog v-model="modalVisible" max-width="800px">
         <v-card>
           <h3 style="text-align: center; margin-top: 20px">
@@ -111,7 +160,7 @@
 
               <!-- Email and Phone Number Fields -->
               <v-row align="center" justify="center">
-                <v-col cols="12" md="6">
+                <v-col cols="12" md="4">
                   <v-text-field
                     v-model="email"
                     :rules="emailRules"
@@ -121,7 +170,18 @@
                   ></v-text-field>
                 </v-col>
 
-                <v-col cols="12" md="6">
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="password"
+                    :rules="passwordRules"
+                    label="Password"
+                    hide-details
+                    required
+                    type="password"
+                  ></v-text-field>
+                </v-col>
+
+                <v-col cols="12" md="4">
                   <v-text-field
                     v-model="phoneNumber"
                     :rules="phoneRules"
@@ -196,6 +256,18 @@ export default {
       middlename: "",
       lastname: "",
       email: "",
+      password: "",
+      passwordRules: [
+        (v) => !!v || "Password is required",
+        (v) => (v && v.length >= 8) || "Password must be at least 8 characters",
+        (v) => /\d/.test(v) || "Password must contain at least one digit",
+        (v) => /[A-Z]/.test(v) || "Password must contain at least one uppercase letter",
+        (v) => /[a-z]/.test(v) || "Password must contain at least one lowercase letter",
+      ],
+      hasMinLength: false,
+      hasUpperCase: false,
+      hasLowerCase: false,
+      hasDigit: false,
       emailRules: [
         (v) => !!v || "Email is required",
         (v) => /.+@.+\..+/.test(v) || "Email must be valid",
@@ -230,6 +302,7 @@ export default {
       this.middlename = "";
       this.lastname = "";
       this.email = "";
+      this.password = "";
       this.phoneNumber = "";
       this.description = "";
       // Reset validation state if using validation
@@ -245,6 +318,7 @@ export default {
     formatPhoneNumber() {
       // Handle phone number formatting logic
     },
+
   },
 };
 </script>
@@ -252,5 +326,16 @@ export default {
 /* Add your custom styles here */
 .color-title {
   color: grey;
+}
+.custom-th {
+  /* Add your custom styles for the table header cells */
+  padding-right: 1000px; /* Adjust the padding as needed */
+  text-align: left;
+  /* Add any other styles as needed */
+}
+td {
+  padding-right: 100px;
+  text-align: left;
+  /*border: 1px solid #ccc;*/
 }
 </style>

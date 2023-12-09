@@ -1,5 +1,6 @@
 <template>
-  <v-app-bar app height="120" color="#64B5F6">
+<!--  <v-app-bar app height="120" color="teal" style="margin-bottom: 1000px">-->
+    <v-app-bar app height="120" color="teal" style="margin-bottom: 1000px; z-index: 10;">
     <v-toolbar-title class="color-app"
       ><h2>Conference Portal</h2></v-toolbar-title
     >
@@ -21,19 +22,19 @@
   </v-app-bar>
 
   <!-- The registration dialog -->
-  <v-dialog v-model="registrationDialog" max-width="600">
-    <v-card>
-      <!-- Your registration form or content goes here -->
-      <v-card-title>Registration Form</v-card-title>
-      <v-card-text>
-        <!-- Your registration form fields go here -->
-      </v-card-text>
-      <v-card-actions>
-        <v-btn @click="registrationDialog = false">Close</v-btn>
-        <!-- Additional actions if needed -->
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+<!--  <v-dialog v-model="registrationDialog" max-width="600">-->
+<!--    <v-card>-->
+<!--      &lt;!&ndash; Your registration form or content goes here &ndash;&gt;-->
+<!--      <v-card-title>Registration Form</v-card-title>-->
+<!--      <v-card-text>-->
+<!--        &lt;!&ndash; Your registration form fields go here &ndash;&gt;-->
+<!--      </v-card-text>-->
+<!--      <v-card-actions>-->
+<!--        <v-btn @click="registrationDialog = false">Close</v-btn>-->
+<!--        &lt;!&ndash; Additional actions if needed &ndash;&gt;-->
+<!--      </v-card-actions>-->
+<!--    </v-card>-->
+<!--  </v-dialog>-->
   <v-container class="mt-12"> </v-container>
   <router-view></router-view>
 </template>
@@ -61,7 +62,7 @@ export default {
       this.$router.push({ path: "/about-page" });
     },
     handleButtonClick3() {
-      // Handle the second button click
+      this.$router.push({path: "authentication"});
     },
   },
 };
