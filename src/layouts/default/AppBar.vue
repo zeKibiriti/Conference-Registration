@@ -1,6 +1,9 @@
 <template>
-  <v-app-bar app height="120" color="#64B5F6">
-    <h2 class="color-app pl-5">Conference Portal</h2>
+  <v-app-bar app height="150" elevation="0" color="#f3f5f5">
+    <div class="pl-10">
+      <img class="coat" :src="coat" />
+    </div>
+    <h2 class="color-app pl-10">Conference Portal</h2>
 
     <!-- Align buttons to the right -->
     <v-spacer></v-spacer>
@@ -42,6 +45,7 @@ export default {
   data() {
     return {
       registrationDialog: false, // Initialize registrationDialog to false
+      coat: "/coat_of_arms.svg.png",
     };
   },
   methods: {
@@ -78,10 +82,19 @@ export default {
   margin: 10px;
 }
 .link.active {
-  background-color: red;
+  background-color: rgb(0, 174, 255);
   color: white;
 }
 .color-app {
-  color: white;
+  color: #616667;
+}
+
+.coat {
+  width: 35%;
+  height: 25%;
+  border-radius: 30%;
+  height: 100px;
+  width: 100px;
+  border: 4px solid rgb(242, 248, 248);
 }
 </style>

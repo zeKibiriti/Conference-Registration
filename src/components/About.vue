@@ -6,6 +6,7 @@
         <h1 class="display-2 text-center mb-5 color-title">
           About Conference Portal
         </h1>
+        <hr class="centered-line" />
         <v-divider class="mb-5"></v-divider>
 
         <!-- Sample about content -->
@@ -74,5 +75,10 @@ export default {
 /* Add your custom styles here */
 .color-title {
   color: grey;
+}
+.centered-line {
+  width: 25%;
+  border: 3px solid grey; /* Adjust thickness as needed */
+  margin: 8px auto; /* Adjust as needed */
 }
 </style>

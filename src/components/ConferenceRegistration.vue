@@ -4,12 +4,11 @@
       <span class="grey--text"
         ><h2 class="color-title">Select Category to Register</h2></span
       >
+      <!-- Horizontal line (hr) -->
+      <hr class="centered-line" />
 
       <v-row class="text-center">
         <v-col>
-          <!-- Horizontal line (hr) -->
-          <hr />
-
           <v-card-text class="pa-10">
             <v-row style="margin-left: 48%"><h4>Categories</h4> </v-row>
             <v-col style="text-align: center">
@@ -341,5 +340,11 @@ td {
   padding-right: 100px;
   text-align: left;
   /*border: 1px solid #ccc;*/
+}
+
+.centered-line {
+  width: 70%;
+  border: 3px solid grey; /* Adjust thickness as needed */
+  margin: 8px auto; /* Adjust as needed */
 }
 </style>
