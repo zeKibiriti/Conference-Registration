@@ -2,6 +2,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import SlideshowPage from "@/components/SlideshowPage";
 import ConferenceRegistration from "@/components/ConferenceRegistration";
+import Login from "@/components/Login";
+
 import About from "@/components/About";
 
 const routes = [
@@ -28,6 +30,11 @@ const routes = [
         path: '/about-page',
         name: "Conference About",
         component: About
+      },
+      {
+        path: '/login-page',
+        name: "Login",
+        component: Login
       },
     ],
   },

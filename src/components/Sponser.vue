@@ -12,7 +12,7 @@
       md="4"
       lg="3"
     >
-      <v-card class="image-card" elevation="2">
+      <v-card class="image-card" elevation="0">
         <v-img :src="image.src" alt="Image" aspect-ratio="2.5"></v-img>
       </v-card>
     </v-col>

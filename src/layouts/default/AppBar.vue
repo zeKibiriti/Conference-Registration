@@ -1,8 +1,6 @@
 <template>
   <v-app-bar app height="120" color="#64B5F6">
-    <v-toolbar-title class="color-app"
-      ><h2>Conference Portal</h2></v-toolbar-title
-    >
+    <h2 class="color-app pl-5">Conference Portal</h2>
 
     <!-- Align buttons to the right -->
     <v-spacer></v-spacer>
@@ -61,7 +59,7 @@ export default {
       this.$router.push({ path: "/about-page" });
     },
     handleButtonClick3() {
-      // Handle the second button click
+      this.$router.push({ path: "/login-page" });
     },
   },
 };
