@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mt-10">
+  <v-container class="mt-10" style="margin-top: 10px">
     <!--    Sliders Starts here-->
     <v-carousel>
       <v-carousel-item src="1.jpg" cover></v-carousel-item>

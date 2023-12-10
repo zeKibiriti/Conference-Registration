@@ -1,7 +1,7 @@
 <!-- src/components/HorizontalImageCards.vue -->
 
 <template>
-  <span class="pt-5 pb-12 color-title"><h1>Sponsors</h1></span>
+  <span class="pt-12 pb-12 color-title"><h1>Sponsors</h1></span>
 
   <v-row>
     <v-col

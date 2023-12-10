@@ -5,13 +5,14 @@ import ConferenceRegistration from "@/components/ConferenceRegistration";
 import Login from "@/components/Login";
 
 import About from "@/components/About";
+import Authentication from "@/components/Authentication"
 
 const routes = [
   {
     path: '/',
     component: () => import('@/layouts/default/Default.vue'),
 
-    
+
     children: [
       {
         path: '',
@@ -36,9 +37,14 @@ const routes = [
         name: "Login",
         component: Login
       },
+      {
+        path: '/authentication',
+        name: "Login",
+        component: Authentication
+      },
     ],
   },
- 
+
   {
     path: '/home-page',
     name: "Home",
