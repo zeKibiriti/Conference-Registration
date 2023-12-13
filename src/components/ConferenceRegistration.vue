@@ -12,8 +12,9 @@
           <v-card-text class="pa-10">
             <v-row style="margin-left: 48%"><h4>Categories</h4> </v-row>
             <v-col style="text-align: center">
+<!--              @change="handleRadioChange"-->
               <v-radio-group
-                @change="handleRadioChange"
+                @click="openDialog('dialog1')"
                 style="margin-left: 35%"
                 v-model="inline"
                 inline
@@ -44,37 +45,37 @@
               <td>1.</td>
               <td>Health Worker</td>
               <td>100,000 TShs.</td>
-              <v-btn type="submit" color="primary">View Details</v-btn>
+              <v-btn type="submit" color="primary" @click="openDialog('dialog2')">View Details</v-btn>
             </tr>
             <tr>
               <td>2.</td>
               <td>University Student</td>
               <td>100,000 TShs.</td>
-              <v-btn type="submit" color="primary">View Details</v-btn>
+              <v-btn type="submit" color="primary" @click="openDialog('dialog3')">View Details</v-btn>
             </tr>
             <tr>
               <td>3.</td>
               <td>Non student</td>
               <td>150,000 TShs.</td>
-              <v-btn type="submit" color="primary">View Details</v-btn>
+              <v-btn type="submit" color="primary" @click="openDialog('dialog4')">View Details</v-btn>
             </tr>
             <tr>
               <td>4.</td>
               <td>Foreigner/international</td>
               <td>£USD 100</td>
-              <v-btn type="submit" color="primary">View Details</v-btn>
+              <v-btn type="submit" color="primary" @click="openDialog('dialog5')">View Details</v-btn>
             </tr>
             <tr>
               <td>5.</td>
               <td>Booth</td>
               <td>2,000,000 TSh.</td>
-              <v-btn type="submit" color="primary">View Details</v-btn>
+              <v-btn type="submit" color="primary" @click="openDialog('dialog6')">View Details</v-btn>
             </tr>
             <tr>
               <td>6.</td>
               <td>Forum</td>
               <td>10,000,000 TSh.</td>
-              <v-btn type="submit" color="primary">View Details</v-btn>
+              <v-btn type="submit" color="primary" @click="openDialog('dialog7')">View Details</v-btn>
             </tr>
           </tbody>
         </table>
@@ -82,7 +83,7 @@
       <!-- Horizontal line (hr) -->
       <hr />
       <!--      <h4>HELLO</h4>-->
-      <v-dialog v-model="modalVisible" max-width="800px">
+      <v-dialog v-model="dialogs.dialog1" max-width="800px">
         <v-card>
           <h3 style="text-align: center; margin-top: 20px">
             Conference Registration Form
@@ -215,7 +216,7 @@
               <v-row class="mt-4">
                 <!-- Cancel Button -->
                 <v-col>
-                  <v-btn @click="closeModal">Cancel</v-btn>
+                  <v-btn @click="closeDialog">Cancel</v-btn>
                 </v-col>
                 <!-- Reset Button -->
                 <v-col>
@@ -240,6 +241,170 @@
         <!--          </v-card-actions>-->
         <!--        </v-card>-->
       </v-dialog>
+
+      <v-dialog v-model="dialogs.dialog2" max-width="500">
+        <v-card>
+          <v-card-title style="background-color: teal;">
+            Package Details
+<!--            <v-btn icon @click="closeDialog('dialog1')">-->
+<!--              <v-icon>mdi-close</v-icon>-->
+<!--            </v-btn>-->
+          </v-card-title>
+
+          <v-card-text>
+            <!-- Content of Dialog 1 goes here -->
+            <ol>
+              <li>Trophy and certificate</li>
+              <li>Inclusion of the organization logo in the official banner for sponsors</li>
+              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
+              <li>Free participation of 4 representatives</li>
+              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
+              <li>2 Booths</li>
+            </ol>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn @click="closeDialog('dialog2')">Close</v-btn>
+<!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-dialog v-model="dialogs.dialog3" max-width="500">
+        <v-card>
+          <v-card-title style="background-color: teal;">
+            Package Details
+<!--            <v-btn icon @click="closeDialog('dialog1')">-->
+<!--              <v-icon>mdi-close</v-icon>-->
+<!--            </v-btn>-->
+          </v-card-title>
+
+          <v-card-text>
+            <!-- Content of Dialog 1 goes here -->
+            <ol>
+              <li>Trophy and certificate</li>
+              <li>Inclusion of the organization logo in the official banner for sponsors</li>
+              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
+              <li>Free participation of 4 representatives</li>
+              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
+              <li>2 Booths</li>
+            </ol>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn @click="closeDialog('dialog3')">Close</v-btn>
+<!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-dialog v-model="dialogs.dialog4" max-width="500">
+        <v-card>
+          <v-card-title style="background-color: teal;">
+            Package Details
+            <!--            <v-btn icon @click="closeDialog('dialog1')">-->
+            <!--              <v-icon>mdi-close</v-icon>-->
+            <!--            </v-btn>-->
+          </v-card-title>
+
+          <v-card-text>
+            <!-- Content of Dialog 1 goes here -->
+            <ol>
+              <li>Trophy and certificate</li>
+              <li>Inclusion of the organization logo in the official banner for sponsors</li>
+              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
+              <li>Free participation of 4 representatives</li>
+              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
+              <li>2 Booths</li>
+            </ol>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn @click="closeDialog('dialog4')">Close</v-btn>
+            <!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-dialog v-model="dialogs.dialog5" max-width="500">
+        <v-card>
+          <v-card-title style="background-color: teal;">
+            Package Details
+            <!--            <v-btn icon @click="closeDialog('dialog1')">-->
+            <!--              <v-icon>mdi-close</v-icon>-->
+            <!--            </v-btn>-->
+          </v-card-title>
+
+          <v-card-text>
+            <!-- Content of Dialog 1 goes here -->
+            <ol>
+              <li>Trophy and certificate</li>
+              <li>Inclusion of the organization logo in the official banner for sponsors</li>
+              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
+              <li>Free participation of 4 representatives</li>
+              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
+              <li>2 Booths</li>
+            </ol>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn @click="closeDialog('dialog5')">Close</v-btn>
+            <!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-dialog v-model="dialogs.dialog6" max-width="500">
+        <v-card>
+          <v-card-title style="background-color: teal;">
+            Package Details
+            <!--            <v-btn icon @click="closeDialog('dialog1')">-->
+            <!--              <v-icon>mdi-close</v-icon>-->
+            <!--            </v-btn>-->
+          </v-card-title>
+
+          <v-card-text>
+            <!-- Content of Dialog 1 goes here -->
+            <ol>
+              <li>Trophy and certificate</li>
+              <li>Inclusion of the organization logo in the official banner for sponsors</li>
+              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
+              <li>Free participation of 4 representatives</li>
+              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
+              <li>2 Booths</li>
+            </ol>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn @click="closeDialog('dialog6')">Close</v-btn>
+            <!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-dialog v-model="dialogs.dialog7" max-width="500">
+        <v-card>
+          <v-card-title style="background-color: teal;">
+            Package Details
+            <!--            <v-btn icon @click="closeDialog('dialog1')">-->
+            <!--              <v-icon>mdi-close</v-icon>-->
+            <!--            </v-btn>-->
+          </v-card-title>
+
+          <v-card-text>
+            <!-- Content of Dialog 1 goes here -->
+            <ol>
+              <li>Trophy and certificate</li>
+              <li>Inclusion of the organization logo in the official banner for sponsors</li>
+              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
+              <li>Free participation of 4 representatives</li>
+              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
+              <li>2 Booths</li>
+            </ol>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn @click="closeDialog('dialog7')">Close</v-btn>
+            <!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
     </v-card>
   </v-container>
 </template>
@@ -248,10 +413,19 @@
 export default {
   data() {
     return {
+      dialogs: {
+        dialog1: false,
+        dialog2: false,
+        dialog3: false,
+        dialog4: false,
+        dialog5: false,
+        dialog6: false,
+        dialog7: false,
+      },
       valid: true,
       inline: true,
       selectedOption: null,
-      modalVisible: false,
+      // modalVisible: false,
       country: null,
       category: null,
       gender: null,
@@ -292,6 +466,28 @@ export default {
     };
   },
   methods: {
+    openDialog(dialogName) {
+      this.dialogs[dialogName] = true;
+    },
+
+    closeDialog(dialogName) {
+      this.dialogs[dialogName] = false;
+    },
+
+    // openDialog(dialogName) {
+    //   this.$set(this.dialogs, dialogName, true);
+    // },
+    // closeDialog(dialogName) {
+    //   this.$set(this.dialogs, dialogName, false);
+    // },
+    performAction(dialogName) {
+      // Logic for performing an action when a button in the dialog is clicked
+      console.log(`Action performed in ${dialogName}`);
+    },
+    handleButtonChange() {
+      // Show the modal when a radio button is selected
+      this.modalVisible = true;
+    },
     handleRadioChange() {
       // Show the modal when a radio button is selected
       this.modalVisible = true;
