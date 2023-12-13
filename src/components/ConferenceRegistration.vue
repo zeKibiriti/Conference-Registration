@@ -35,6 +35,7 @@
               <th>S/No</th>
               <th>Category Name</th>
               <th>Fees</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <!--          <hr />-->
@@ -43,31 +44,37 @@
               <td>1.</td>
               <td>Health Worker</td>
               <td>100,000 TShs.</td>
+              <v-btn type="submit" color="primary">View Details</v-btn>
             </tr>
             <tr>
               <td>2.</td>
               <td>University Student</td>
               <td>100,000 TShs.</td>
+              <v-btn type="submit" color="primary">View Details</v-btn>
             </tr>
             <tr>
               <td>3.</td>
               <td>Non student</td>
               <td>150,000 TShs.</td>
+              <v-btn type="submit" color="primary">View Details</v-btn>
             </tr>
             <tr>
               <td>4.</td>
               <td>Foreigner/international</td>
               <td>£USD 100</td>
+              <v-btn type="submit" color="primary">View Details</v-btn>
             </tr>
             <tr>
               <td>5.</td>
               <td>Booth</td>
               <td>2,000,000 TSh.</td>
+              <v-btn type="submit" color="primary">View Details</v-btn>
             </tr>
             <tr>
               <td>6.</td>
               <td>Forum</td>
               <td>10,000,000 TSh.</td>
+              <v-btn type="submit" color="primary">View Details</v-btn>
             </tr>
           </tbody>
         </table>
