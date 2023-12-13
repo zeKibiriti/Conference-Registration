@@ -216,7 +216,7 @@
               <v-row class="mt-4">
                 <!-- Cancel Button -->
                 <v-col>
-                  <v-btn @click="closeDialog">Cancel</v-btn>
+                  <v-btn @click="closeDialog('dialog1')">Cancel</v-btn>
                 </v-col>
                 <!-- Reset Button -->
                 <v-col>
