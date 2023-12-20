@@ -16,6 +16,9 @@
     <v-btn class="color-app" text @click="handleButtonClick1"
       ><h3>Register</h3></v-btn
     >
+    <v-btn class="color-app" text @click="handleButtonAbstract"
+      ><h3>Abstract</h3></v-btn
+    >
     <v-btn class="color-app" text @click="handleButtonClick3"
       ><h3>Login</h3></v-btn
     >
@@ -63,7 +66,10 @@ export default {
       this.$router.push({ path: "/about-page" });
     },
     handleButtonClick3() {
-      this.$router.push({ path: "authentication" });
+      this.$router.push({ path: "/authentication" });
+    },
+    handleButtonAbstract() {
+      this.$router.push({ path: "/abstract-page" });
     },
   },
 };

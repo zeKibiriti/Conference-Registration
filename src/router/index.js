@@ -6,6 +6,7 @@ import Login from "@/components/Login";
 
 import About from "@/components/About";
 import Authentication from "@/components/Authentication"
+import Abstract from "@/components/Abstract";
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
         path: '/about-page',
         name: "Conference About",
         component: About
+      },
+      {
+        path: '/abstract-page',
+        name: "Abstract",
+        component: Abstract
       },
       {
         path: '/login-page',
