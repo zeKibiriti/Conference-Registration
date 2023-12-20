@@ -158,6 +158,26 @@
                     </v-col>
                   </v-row>
 
+                  <v-row class="text-center">
+                    <v-col>
+                      <v-card-text class="pa-10">
+                        <v-row style="margin-left: auto"><h4>I consent that my abstract be published in peer review journal</h4> </v-row>
+                        <v-col style="text-align: center">
+                          <!--              @change="handleRadioChange"-->
+                          <v-radio-group
+                            @click="openDialog('dialog1')"
+                            style="margin-left: auto"
+                            v-model="inline"
+                            inline
+                          >
+                            <v-radio label="Yes" value="Yes"></v-radio>
+                            <v-radio label="No" value="No"></v-radio>
+                          </v-radio-group>
+                        </v-col>
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+
                   <!-- Buttons -->
                   <v-row class="mt-4">
                     <!-- Cancel Button -->

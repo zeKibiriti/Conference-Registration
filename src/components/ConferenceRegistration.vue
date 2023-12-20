@@ -1,12 +1,12 @@
 <template>
   <v-container class="mt-12">
-    <v-card flat class="mx-auto" width="900">
+<!--    <v-card flat class="mx-auto" width="900">-->
       <span class="grey--text"
         ><h2 class="color-title">Select Category to Register</h2></span
       >
       <!-- Horizontal line (hr) -->
       <hr class="centered-line" />
-
+    <v-card>
       <v-row class="text-center">
         <v-col>
           <v-card-text class="pa-10">
