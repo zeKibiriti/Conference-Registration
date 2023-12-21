@@ -160,9 +160,9 @@
 
                   <v-row class="text-center">
                     <v-col>
-                      <v-card-text class="pa-10">
-                        <v-row style="margin-left: auto"><h4>I consent that my abstract be published in peer review journal</h4> </v-row>
-                        <v-col style="text-align: center">
+                      <v-card-text class="pa-10" style="text-align: center">
+                        <v-row><h4>I consent that my abstract be published in peer review journal</h4> </v-row>
+                        <v-col>
                           <!--              @change="handleRadioChange"-->
                           <v-radio-group
                             @click="openDialog('dialog1')"
@@ -260,7 +260,9 @@ export default {
         (v) => /^\d{10}$/.test(v) || "Phone number must be 10 digits",
       ],
       description: "",
-      nameRules: [],
+      nameRules: [
+        (v) => !!v || 'This field is required',
+      ],
     };
   },
   methods: {

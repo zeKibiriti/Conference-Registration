@@ -224,22 +224,12 @@
                 </v-col>
                 <!-- Submit Button -->
                 <v-col>
-                  <v-btn type="submit" color="primary">Submit</v-btn>
+                  <v-btn type="submit" color="primary" @click="postData">Submit</v-btn>
                 </v-col>
               </v-row>
             </v-container>
           </v-form>
         </v-card>
-        <!--        <v-card>-->
-        <!--          <v-card-title>Modal Title</v-card-title>-->
-        <!--          <v-card-text>-->
-        <!--            &lt;!&ndash; Modal content goes here &ndash;&gt;-->
-        <!--            This is the content of the modal.-->
-        <!--          </v-card-text>-->
-        <!--          <v-card-actions>-->
-        <!--            <v-btn @click="closeModal">Close</v-btn>-->
-        <!--          </v-card-actions>-->
-        <!--        </v-card>-->
       </v-dialog>
 
       <v-dialog v-model="dialogs.dialog2" max-width="500">
@@ -405,14 +395,22 @@
         </v-card>
       </v-dialog>
 
+      <div v-if="fetchedData"> MY-DATA
+        {{ fetchedData }}
+      </div>
+
     </v-card>
   </v-container>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
+      fetchedData: null,
+      // postData: null,
       dialogs: {
         dialog1: false,
         dialog2: false,
@@ -466,6 +464,61 @@ export default {
     };
   },
   methods: {
+    async postData() {
+      try {
+        const response = await axios.post('http://localhost:3000/registration', {
+          country: this.country,
+          category: this.category,
+          gender: this.gender,
+          firstname: this.firstname,
+          middlename: this.middlename,
+          lastname: this.lastname,
+          email: this.email,
+          password: this.password,
+          phoneNumber: this.phoneNumber,
+          description: this.description,
+          // Add more key-value pairs as needed
+        });
+
+        console.log('Response:', response.data);
+
+        // Handle the response data as needed
+      } catch (error) {
+        console.error('Error sending POST request:', error);
+
+        // Handle the error as needed
+      }
+    },
+
+    // async postData() {
+    //   try {
+    //     const response = await axios.post('http://localhost:3000/registration', {
+    //       // Your data to be sent in the POST request body
+    //       key1: 'value1',
+    //       key2: 'value2',
+    //       // Add more key-value pairs as needed
+    //     });
+    //
+    //     console.log('Response:', response.data);
+    //
+    //     // Handle the response data as needed
+    //   } catch (error) {
+    //     console.error('Error sending POST request:', error);
+    //
+    //     // Handle the error as needed
+    //   }
+    // },
+
+    async fetchData() {
+          try {
+            const response = await axios.get('http://localhost:3000/registration');
+            this.data = response.data;
+            console.error('MyData:', this.data);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        },
+    // },
     openDialog(dialogName) {
       this.dialogs[dialogName] = true;
     },
@@ -525,7 +578,12 @@ export default {
       // Handle phone number formatting logic
     },
   },
-};
+  mounted() {
+    // Call the fetchData method when the component is mounted
+    this.fetchData();
+  },
+ };
+
 </script>
 <style>
 /* Add your custom styles here */
