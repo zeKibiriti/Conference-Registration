@@ -395,11 +395,39 @@
         </v-card>
       </v-dialog>
 
-      <div v-if="fetchedData"> MY-DATA
-        {{ fetchedData }}
-      </div>
-
     </v-card>
+    <div>
+      <table>
+        <thead>
+        <tr style="text-align: left">
+          <th>S/No</th>
+          <th>First Name</th>
+          <th>Middle Name</th>
+          <th>Last Name</th>
+          <th>Country</th>
+          <th>Category</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <!--            <th>Description</th>-->
+          <!-- Add more headers as needed -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item, index) in fetchedData" :key="index">
+          <td>{{ index + 1 }}</td>
+          <td>{{ item.firstname }}</td>
+          <td>{{ item.middlename }}</td>
+          <td>{{ item.lastname }}</td>
+          <td>{{ item.country }}</td>
+          <td>{{ item.category }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.phoneNumber }}</td>
+          <!--            <td>{{ item.description }}</td>-->
+          <!-- Display more properties as needed -->
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </v-container>
 </template>
 
@@ -463,6 +491,10 @@ export default {
       nameRules: [],
     };
   },
+  created() {
+    // Call the fetchData method when the component is mounted
+    this.fetchData();
+  },
   methods: {
     async postData() {
       try {
@@ -510,15 +542,15 @@ export default {
     // },
 
     async fetchData() {
-          try {
-            const response = await axios.get('http://localhost:3000/registration');
-            this.data = response.data;
-            console.error('MyData:', this.data);
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        },
-    // },
+      try {
+        const response = await axios.get('http://localhost:3000/registration');
+        this.fetchedData = response.data; // Update this line
+        console.log('MyData:', JSON.parse(JSON.stringify(this.fetchedData)));
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    },
+
     openDialog(dialogName) {
       this.dialogs[dialogName] = true;
     },
@@ -578,10 +610,7 @@ export default {
       // Handle phone number formatting logic
     },
   },
-  mounted() {
-    // Call the fetchData method when the component is mounted
-    this.fetchData();
-  },
+
  };
 
 </script>
