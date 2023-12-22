@@ -522,30 +522,11 @@ export default {
       }
     },
 
-    // async postData() {
-    //   try {
-    //     const response = await axios.post('http://localhost:3000/registration', {
-    //       // Your data to be sent in the POST request body
-    //       key1: 'value1',
-    //       key2: 'value2',
-    //       // Add more key-value pairs as needed
-    //     });
-    //
-    //     console.log('Response:', response.data);
-    //
-    //     // Handle the response data as needed
-    //   } catch (error) {
-    //     console.error('Error sending POST request:', error);
-    //
-    //     // Handle the error as needed
-    //   }
-    // },
-
     async fetchData() {
       try {
         const response = await axios.get('http://localhost:3000/registration');
         this.fetchedData = response.data; // Update this line
-        console.log('MyData:', JSON.parse(JSON.stringify(this.fetchedData)));
+        // console.log('MyData:', JSON.parse(JSON.stringify(this.fetchedData)));
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -559,27 +540,9 @@ export default {
       this.dialogs[dialogName] = false;
     },
 
-    // openDialog(dialogName) {
-    //   this.$set(this.dialogs, dialogName, true);
-    // },
-    // closeDialog(dialogName) {
-    //   this.$set(this.dialogs, dialogName, false);
-    // },
     performAction(dialogName) {
       // Logic for performing an action when a button in the dialog is clicked
       console.log(`Action performed in ${dialogName}`);
-    },
-    handleButtonChange() {
-      // Show the modal when a radio button is selected
-      this.modalVisible = true;
-    },
-    handleRadioChange() {
-      // Show the modal when a radio button is selected
-      this.modalVisible = true;
-    },
-    closeModal() {
-      // Close the modal
-      this.modalVisible = false;
     },
     submitForm() {
       // Your form submission logic here
