@@ -6,6 +6,7 @@ import Login from "@/components/Login";
 
 import About from "@/components/About";
 import Authentication from "@/components/Authentication"
+import Abstract from "@/components/Abstract";
 
 const routes = [
   {
@@ -20,7 +21,7 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (Home-[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import('@/views/Home.vue'),
+        // component: () => import('@/views/Home.vue'),
       },
       {
         path: '/registration-page',
@@ -31,6 +32,11 @@ const routes = [
         path: '/about-page',
         name: "Conference About",
         component: About
+      },
+      {
+        path: '/abstract-page',
+        name: "Abstract",
+        component: Abstract
       },
       {
         path: '/login-page',
