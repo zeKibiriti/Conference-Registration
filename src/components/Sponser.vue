@@ -14,7 +14,7 @@
         cols="12"
         sm="6"
         md="4"
-        lg="3"
+        lg="2"
       >
         <v-card class="image-card" elevation="0">
           <v-img :src="image.src" alt="Image" aspect-ratio="2.5"></v-img>
@@ -33,6 +33,8 @@ export default {
         { id: 2, src: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" },
         { id: 3, src: "https://cdn.vuetifyjs.com/images/cards/docks.jpg" },
         { id: 4, src: "https://cdn.vuetifyjs.com/images/cards/hotel.jpg" },
+        { id: 5, src: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" },
+        { id: 6, src: "https://cdn.vuetifyjs.com/images/cards/docks.jpg" },
         // Add more images as needed
       ],
     };
