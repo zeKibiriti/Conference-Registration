@@ -1,18 +1,18 @@
 <template>
   <v-container class="mt-12">
-<!--    <v-card flat class="mx-auto" width="900">-->
-      <span class="grey--text"
-        ><h2 class="color-title">Select Category to Register</h2></span
-      >
-      <!-- Horizontal line (hr) -->
-      <hr class="centered-line" />
+    <!--    <v-card flat class="mx-auto" width="900">-->
+    <span class="grey--text"
+      ><h2 class="color-title">Select Category to Register</h2></span
+    >
+    <!-- Horizontal line (hr) -->
+    <hr class="centered-line" />
     <v-card>
       <v-row class="text-center">
         <v-col>
           <v-card-text class="pa-10">
             <v-row style="margin-left: 48%"><h4>Categories</h4> </v-row>
             <v-col style="text-align: center">
-<!--              @change="handleRadioChange"-->
+              <!--              @change="handleRadioChange"-->
               <v-radio-group
                 @click="openDialog('dialog1')"
                 style="margin-left: 35%"
@@ -45,37 +45,67 @@
               <td>1.</td>
               <td>Health Worker</td>
               <td>100,000 TShs.</td>
-              <v-btn type="submit" color="primary" @click="openDialog('dialog2')">View Details</v-btn>
+              <v-btn
+                type="submit"
+                color="primary"
+                @click="openDialog('dialog2')"
+                >View Details</v-btn
+              >
             </tr>
             <tr>
               <td>2.</td>
               <td>University Student</td>
               <td>100,000 TShs.</td>
-              <v-btn type="submit" color="primary" @click="openDialog('dialog3')">View Details</v-btn>
+              <v-btn
+                type="submit"
+                color="primary"
+                @click="openDialog('dialog3')"
+                >View Details</v-btn
+              >
             </tr>
             <tr>
               <td>3.</td>
               <td>Non student</td>
               <td>150,000 TShs.</td>
-              <v-btn type="submit" color="primary" @click="openDialog('dialog4')">View Details</v-btn>
+              <v-btn
+                type="submit"
+                color="primary"
+                @click="openDialog('dialog4')"
+                >View Details</v-btn
+              >
             </tr>
             <tr>
               <td>4.</td>
               <td>Foreigner/international</td>
               <td>£USD 100</td>
-              <v-btn type="submit" color="primary" @click="openDialog('dialog5')">View Details</v-btn>
+              <v-btn
+                type="submit"
+                color="primary"
+                @click="openDialog('dialog5')"
+                >View Details</v-btn
+              >
             </tr>
             <tr>
               <td>5.</td>
               <td>Booth</td>
               <td>2,000,000 TSh.</td>
-              <v-btn type="submit" color="primary" @click="openDialog('dialog6')">View Details</v-btn>
+              <v-btn
+                type="submit"
+                color="primary"
+                @click="openDialog('dialog6')"
+                >View Details</v-btn
+              >
             </tr>
             <tr>
               <td>6.</td>
               <td>Forum</td>
               <td>10,000,000 TSh.</td>
-              <v-btn type="submit" color="primary" @click="openDialog('dialog7')">View Details</v-btn>
+              <v-btn
+                type="submit"
+                color="primary"
+                @click="openDialog('dialog7')"
+                >View Details</v-btn
+              >
             </tr>
           </tbody>
         </table>
@@ -96,7 +126,9 @@
                 <v-col cols="12" md="4">
                   <v-select
                     v-model="category"
-                    :items="['Student', 'Non Student']"
+                    :items="registrationCategories"
+                    item-title="name"
+                    item-value="id"
                     label="Select Category"
                   >
                     <template #append-outer>
@@ -106,15 +138,19 @@
                 </v-col>
 
                 <v-col cols="12" md="4">
-                  <v-select
+                  <v-autocomplete
                     v-model="country"
-                    :items="['Tanzania', 'Kenya', 'Uganda']"
+                    :disabled="isUpdating"
+                    :items="countries"
+                    color="blue-grey-lighten-2"
+                    item-title="name"
+                    item-value="id"
                     label="Select Country"
                   >
                     <template #append-outer>
                       <v-icon @click="clearSelection">mdi-close-circle</v-icon>
                     </template>
-                  </v-select>
+                  </v-autocomplete>
                 </v-col>
 
                 <v-col cols="12" md="4">
@@ -224,7 +260,9 @@
                 </v-col>
                 <!-- Submit Button -->
                 <v-col>
-                  <v-btn type="submit" color="primary" @click="postData">Submit</v-btn>
+                  <v-btn type="submit" color="primary" @click="postData"
+                    >Submit</v-btn
+                  >
                 </v-col>
               </v-row>
             </v-container>
@@ -234,61 +272,7 @@
 
       <v-dialog v-model="dialogs.dialog2" max-width="500">
         <v-card>
-          <v-card-title style="background-color: teal;">
-            Package Details
-<!--            <v-btn icon @click="closeDialog('dialog1')">-->
-<!--              <v-icon>mdi-close</v-icon>-->
-<!--            </v-btn>-->
-          </v-card-title>
-
-          <v-card-text>
-            <!-- Content of Dialog 1 goes here -->
-            <ol>
-              <li>Trophy and certificate</li>
-              <li>Inclusion of the organization logo in the official banner for sponsors</li>
-              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
-              <li>Free participation of 4 representatives</li>
-              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
-              <li>2 Booths</li>
-            </ol>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn @click="closeDialog('dialog2')">Close</v-btn>
-<!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <v-dialog v-model="dialogs.dialog3" max-width="500">
-        <v-card>
-          <v-card-title style="background-color: teal;">
-            Package Details
-<!--            <v-btn icon @click="closeDialog('dialog1')">-->
-<!--              <v-icon>mdi-close</v-icon>-->
-<!--            </v-btn>-->
-          </v-card-title>
-
-          <v-card-text>
-            <!-- Content of Dialog 1 goes here -->
-            <ol>
-              <li>Trophy and certificate</li>
-              <li>Inclusion of the organization logo in the official banner for sponsors</li>
-              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
-              <li>Free participation of 4 representatives</li>
-              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
-              <li>2 Booths</li>
-            </ol>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn @click="closeDialog('dialog3')">Close</v-btn>
-<!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <v-dialog v-model="dialogs.dialog4" max-width="500">
-        <v-card>
-          <v-card-title style="background-color: teal;">
+          <v-card-title style="background-color: teal">
             Package Details
             <!--            <v-btn icon @click="closeDialog('dialog1')">-->
             <!--              <v-icon>mdi-close</v-icon>-->
@@ -299,8 +283,80 @@
             <!-- Content of Dialog 1 goes here -->
             <ol>
               <li>Trophy and certificate</li>
-              <li>Inclusion of the organization logo in the official banner for sponsors</li>
-              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
+              <li>
+                Inclusion of the organization logo in the official banner for
+                sponsors
+              </li>
+              <li>
+                Display of advert and a short clip of the organization’s
+                services in the registration portal and conference screens
+              </li>
+              <li>Free participation of 4 representatives</li>
+              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
+              <li>2 Booths</li>
+            </ol>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn @click="closeDialog('dialog2')">Close</v-btn>
+            <!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-dialog v-model="dialogs.dialog3" max-width="500">
+        <v-card>
+          <v-card-title style="background-color: teal">
+            Package Details
+            <!--            <v-btn icon @click="closeDialog('dialog1')">-->
+            <!--              <v-icon>mdi-close</v-icon>-->
+            <!--            </v-btn>-->
+          </v-card-title>
+
+          <v-card-text>
+            <!-- Content of Dialog 1 goes here -->
+            <ol>
+              <li>Trophy and certificate</li>
+              <li>
+                Inclusion of the organization logo in the official banner for
+                sponsors
+              </li>
+              <li>
+                Display of advert and a short clip of the organization’s
+                services in the registration portal and conference screens
+              </li>
+              <li>Free participation of 4 representatives</li>
+              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
+              <li>2 Booths</li>
+            </ol>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn @click="closeDialog('dialog3')">Close</v-btn>
+            <!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-dialog v-model="dialogs.dialog4" max-width="500">
+        <v-card>
+          <v-card-title style="background-color: teal">
+            Package Details
+            <!--            <v-btn icon @click="closeDialog('dialog1')">-->
+            <!--              <v-icon>mdi-close</v-icon>-->
+            <!--            </v-btn>-->
+          </v-card-title>
+
+          <v-card-text>
+            <!-- Content of Dialog 1 goes here -->
+            <ol>
+              <li>Trophy and certificate</li>
+              <li>
+                Inclusion of the organization logo in the official banner for
+                sponsors
+              </li>
+              <li>
+                Display of advert and a short clip of the organization’s
+                services in the registration portal and conference screens
+              </li>
               <li>Free participation of 4 representatives</li>
               <li>2 Minutes talk, in the Main Hall, about their businesses</li>
               <li>2 Booths</li>
@@ -315,7 +371,7 @@
       </v-dialog>
       <v-dialog v-model="dialogs.dialog5" max-width="500">
         <v-card>
-          <v-card-title style="background-color: teal;">
+          <v-card-title style="background-color: teal">
             Package Details
             <!--            <v-btn icon @click="closeDialog('dialog1')">-->
             <!--              <v-icon>mdi-close</v-icon>-->
@@ -326,8 +382,14 @@
             <!-- Content of Dialog 1 goes here -->
             <ol>
               <li>Trophy and certificate</li>
-              <li>Inclusion of the organization logo in the official banner for sponsors</li>
-              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
+              <li>
+                Inclusion of the organization logo in the official banner for
+                sponsors
+              </li>
+              <li>
+                Display of advert and a short clip of the organization’s
+                services in the registration portal and conference screens
+              </li>
               <li>Free participation of 4 representatives</li>
               <li>2 Minutes talk, in the Main Hall, about their businesses</li>
               <li>2 Booths</li>
@@ -342,7 +404,7 @@
       </v-dialog>
       <v-dialog v-model="dialogs.dialog6" max-width="500">
         <v-card>
-          <v-card-title style="background-color: teal;">
+          <v-card-title style="background-color: teal">
             Package Details
             <!--            <v-btn icon @click="closeDialog('dialog1')">-->
             <!--              <v-icon>mdi-close</v-icon>-->
@@ -353,8 +415,14 @@
             <!-- Content of Dialog 1 goes here -->
             <ol>
               <li>Trophy and certificate</li>
-              <li>Inclusion of the organization logo in the official banner for sponsors</li>
-              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
+              <li>
+                Inclusion of the organization logo in the official banner for
+                sponsors
+              </li>
+              <li>
+                Display of advert and a short clip of the organization’s
+                services in the registration portal and conference screens
+              </li>
               <li>Free participation of 4 representatives</li>
               <li>2 Minutes talk, in the Main Hall, about their businesses</li>
               <li>2 Booths</li>
@@ -369,7 +437,7 @@
       </v-dialog>
       <v-dialog v-model="dialogs.dialog7" max-width="500">
         <v-card>
-          <v-card-title style="background-color: teal;">
+          <v-card-title style="background-color: teal">
             Package Details
             <!--            <v-btn icon @click="closeDialog('dialog1')">-->
             <!--              <v-icon>mdi-close</v-icon>-->
@@ -380,8 +448,14 @@
             <!-- Content of Dialog 1 goes here -->
             <ol>
               <li>Trophy and certificate</li>
-              <li>Inclusion of the organization logo in the official banner for sponsors</li>
-              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
+              <li>
+                Inclusion of the organization logo in the official banner for
+                sponsors
+              </li>
+              <li>
+                Display of advert and a short clip of the organization’s
+                services in the registration portal and conference screens
+              </li>
               <li>Free participation of 4 representatives</li>
               <li>2 Minutes talk, in the Main Hall, about their businesses</li>
               <li>2 Booths</li>
@@ -394,37 +468,36 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-
     </v-card>
     <div>
       <table>
         <thead>
-        <tr style="text-align: left">
-          <th>S/No</th>
-          <th>First Name</th>
-          <th>Middle Name</th>
-          <th>Last Name</th>
-          <th>Country</th>
-          <th>Category</th>
-          <th>Email</th>
-          <th>Phone Number</th>
-          <!--            <th>Description</th>-->
-          <!-- Add more headers as needed -->
-        </tr>
+          <tr style="text-align: left">
+            <th>S/No</th>
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>Last Name</th>
+            <th>Country</th>
+            <th>Category</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <!--            <th>Description</th>-->
+            <!-- Add more headers as needed -->
+          </tr>
         </thead>
         <tbody>
-        <tr v-for="(item, index) in fetchedData" :key="index">
-          <td>{{ index + 1 }}</td>
-          <td>{{ item.firstname }}</td>
-          <td>{{ item.middlename }}</td>
-          <td>{{ item.lastname }}</td>
-          <td>{{ item.country }}</td>
-          <td>{{ item.category }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.phoneNumber }}</td>
-          <!--            <td>{{ item.description }}</td>-->
-          <!-- Display more properties as needed -->
-        </tr>
+          <tr v-for="(item, index) in fetchedData" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ item.firstname }}</td>
+            <td>{{ item.middlename }}</td>
+            <td>{{ item.lastname }}</td>
+            <td>{{ item.country }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.phoneNumber }}</td>
+            <!--            <td>{{ item.description }}</td>-->
+            <!-- Display more properties as needed -->
+          </tr>
         </tbody>
       </table>
     </div>
@@ -438,6 +511,8 @@ export default {
   data() {
     return {
       fetchedData: null,
+      registrationCategories: [],
+      countries: [],
       // postData: null,
       dialogs: {
         dialog1: false,
@@ -493,30 +568,36 @@ export default {
   },
   created() {
     // Call the fetchData method when the component is mounted
-    this.fetchData();
+    // this.fetchData();
+    this.fetchCountries();
+    this.fetchRegistrationCategories();
   },
   methods: {
     async postData() {
       try {
-        const response = await axios.post('http://localhost:3000/registration', {
-          country: this.country,
-          category: this.category,
-          gender: this.gender,
-          firstname: this.firstname,
-          middlename: this.middlename,
-          lastname: this.lastname,
-          email: this.email,
-          password: this.password,
-          phoneNumber: this.phoneNumber,
-          description: this.description,
-          // Add more key-value pairs as needed
-        });
+        const response = await axios.post(
+          "http://localhost:3200/api/v1/users",
+          {
+            country: this.country,
+            category: this.category,
+            sex: this.gender,
+            first_name: this.firstname,
+            middle_name: this.middlename,
+            last_name: this.lastname,
+            countryId: 1,
+            email: this.email,
+            password: this.password,
+            phoneNumber: this.phoneNumber,
+            description: this.description,
+            // Add more key-value pairs as needed
+          }
+        );
 
-        console.log('Response:', response.data);
+        console.log("Response:", response.data);
 
         // Handle the response data as needed
       } catch (error) {
-        console.error('Error sending POST request:', error);
+        console.error("Error sending POST request:", error);
 
         // Handle the error as needed
       }
@@ -524,11 +605,33 @@ export default {
 
     async fetchData() {
       try {
-        const response = await axios.get('http://localhost:3000/registration');
+        const response = await axios.get("http://localhost:3000/registration");
         this.fetchedData = response.data; // Update this line
         // console.log('MyData:', JSON.parse(JSON.stringify(this.fetchedData)));
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
+      }
+    },
+    async fetchCountries() {
+      try {
+        const countries = await axios.get(
+          "http://localhost:3200/api/v1/countries"
+        );
+
+        this.countries = countries.data; // Update this line
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    },
+    async fetchRegistrationCategories() {
+      try {
+        const registrationCategories = await axios.get(
+          "http://localhost:3200/api/v1/registartioncategories"
+        );
+
+        this.registrationCategories = registrationCategories.data; // Update this line
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
     },
 
@@ -573,9 +676,7 @@ export default {
       // Handle phone number formatting logic
     },
   },
-
- };
-
+};
 </script>
 <style>
 /* Add your custom styles here */
