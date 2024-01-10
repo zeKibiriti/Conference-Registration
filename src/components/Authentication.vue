@@ -40,7 +40,7 @@ export default {
     };
   },
   methods: {
-    login() {
+    async login() {
       // Perform authentication logic here
       if (this.username === "user" && this.password === "password") {
         // Simulate a successful login, redirect or set a token, etc.

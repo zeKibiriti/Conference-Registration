@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -52,11 +54,16 @@ export default {
     };
   },
   methods: {
-    login() {
-      // Add your login logic here
-      console.log("Username:", this.username);
-      console.log("Password:", this.password);
-      // You can replace the console.log statements with your actual login logic
+    async login() {
+      const response = await axios.post("http://localhost:3200/api/v1/login", {
+        // Add your login logic here
+        username: this.username,
+        password: this.password
+        // console.log("Username:", this.username);
+        // console.log("Password:", this.password);
+        // You can replace the console.log statements with your actual login logic
+      });
+      console.log("response:", response);
     },
   },
 };

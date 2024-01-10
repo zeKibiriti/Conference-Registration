@@ -84,6 +84,11 @@
       <hr />
       <!--      <h4>HELLO</h4>-->
       <v-dialog v-model="dialogs.dialog1" max-width="800px">
+        <default-alert
+          :show="showDefaultAlert"
+          :message="defaultAlertMessage"
+          :onClose="closeDefaultAlert"
+        />
         <v-card>
           <h3 style="text-align: center; margin-top: 20px">
             Conference Registration Form
@@ -119,7 +124,7 @@
 
                 <v-col cols="12" md="4">
                   <v-select
-                    v-model="gender"
+                    v-model="sex"
                     :items="['Male', 'Female']"
                     label="Select Gender"
                   >
@@ -133,7 +138,7 @@
               <v-row align="center" justify="center">
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="firstname"
+                    v-model="first_name"
                     :rules="nameRules"
                     :counter="10"
                     label="First name"
@@ -144,7 +149,7 @@
 
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="middlename"
+                    v-model="middle_name"
                     :rules="nameRules"
                     :counter="10"
                     label="Middle name"
@@ -155,7 +160,7 @@
 
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="lastname"
+                    v-model="last_name"
                     :rules="nameRules"
                     :counter="10"
                     label="Last name"
@@ -167,7 +172,7 @@
 
               <!-- Email and Phone Number Fields -->
               <v-row align="center" justify="center">
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="3">
                   <v-text-field
                     v-model="email"
                     :rules="emailRules"
@@ -177,7 +182,16 @@
                   ></v-text-field>
                 </v-col>
 
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="3">
+                  <v-text-field
+                    v-model="username"
+                    label="Username"
+                    hide-details
+                    required
+                  ></v-text-field>
+                </v-col>
+
+                <v-col cols="12" md="3">
                   <v-text-field
                     v-model="password"
                     :rules="passwordRules"
@@ -188,9 +202,9 @@
                   ></v-text-field>
                 </v-col>
 
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="3">
                   <v-text-field
-                    v-model="phoneNumber"
+                    v-model="phone_number"
                     :rules="phoneRules"
                     label="Phone Number"
                     @input="formatPhoneNumber"
@@ -433,8 +447,12 @@
 
 <script>
 import axios from "axios";
+import DefaultAlert from "@/components/DefaultAlert";
 
 export default {
+  components: {
+    DefaultAlert,
+  },
   data() {
     return {
       fetchedData: null,
@@ -448,20 +466,24 @@ export default {
         dialog6: false,
         dialog7: false,
       },
+      showDefaultAlert: false,
+      defaultAlertMessage: "",
       valid: true,
       inline: true,
       selectedOption: null,
       // modalVisible: false,
       country: null,
       category: null,
-      gender: null,
+      // age: null,
+      sex: null,
       selectedGender: null,
       selectedCategoryItem: null,
       column: null,
-      firstname: "",
-      middlename: "",
-      lastname: "",
+      first_name: "",
+      middle_name: "",
+      last_name: "",
       email: "",
+      username: "",
       password: "",
       passwordRules: [
         (v) => !!v || "Password is required",
@@ -482,7 +504,7 @@ export default {
         (v) => !!v || "Email is required",
         (v) => /.+@.+\..+/.test(v) || "Email must be valid",
       ],
-      phoneNumber: "",
+      phone_number: "",
       phoneRules: [
         (v) => !!v || "Phone number is required",
         (v) => /^\d{10}$/.test(v) || "Phone number must be 10 digits",
@@ -498,33 +520,38 @@ export default {
   methods: {
     async postData() {
       try {
-        const response = await axios.post('http://localhost:3000/registration', {
+        const response = await axios.post("http://localhost:3200/api/v1/users", {
           country: this.country,
           category: this.category,
-          gender: this.gender,
-          firstname: this.firstname,
-          middlename: this.middlename,
-          lastname: this.lastname,
+          // age: this.age,
+          sex: this.sex,
+          first_name: this.first_name,
+          middle_name: this.middle_name,
+          last_name: this.last_name,
           email: this.email,
+          username: this.username,
           password: this.password,
-          phoneNumber: this.phoneNumber,
+          phone_number: this.phone_number,
           description: this.description,
           // Add more key-value pairs as needed
         });
+        this.showDefaultAlert = true;
+        this.defaultAlertMessage = "Registered successful!";
 
         console.log('Response:', response.data);
 
         // Handle the response data as needed
       } catch (error) {
         console.error('Error sending POST request:', error);
-
         // Handle the error as needed
+        this.showDefaultAlert = true;
+        this.defaultAlertMessage = "Registration failed!";
       }
     },
 
     async fetchData() {
       try {
-        const response = await axios.get('http://localhost:3000/registration');
+        const response = await axios.get('http://localhost:3200/api/v1/users');
         this.fetchedData = response.data; // Update this line
         // console.log('MyData:', JSON.parse(JSON.stringify(this.fetchedData)));
       } catch (error) {
@@ -540,6 +567,11 @@ export default {
       this.dialogs[dialogName] = false;
     },
 
+    closeDefaultAlert() {
+      // Logic to handle closing the default alert
+      this.showDefaultAlert = false;
+    },
+
     performAction(dialogName) {
       // Logic for performing an action when a button in the dialog is clicked
       console.log(`Action performed in ${dialogName}`);
@@ -551,13 +583,15 @@ export default {
       // Reset form fields
       this.country = "";
       this.category = "";
-      this.gender = "";
-      this.firstname = "";
-      this.middlename = "";
-      this.lastname = "";
+      // this.age = "";
+      this.sex = "";
+      this.first_name = "";
+      this.middle_name = "";
+      this.last_name = "";
       this.email = "";
+      this.username = "";
       this.password = "";
-      this.phoneNumber = "";
+      this.phone_number = "";
       this.description = "";
       // Reset validation state if using validation
       this.$refs.submitForm?.resetValidation(); // Replace "form" with the ref attribute of your form element
