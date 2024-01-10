@@ -1,98 +1,50 @@
 <template>
-  <v-container class="mt-12">
-<!--    <v-card flat class="mx-auto" width="900">-->
-      <span class="grey--text"
-        ><h2 class="color-title">Select Category to Register</h2></span
-      >
-      <!-- Horizontal line (hr) -->
-      <hr class="centered-line" />
-    <v-card>
+  <v-app>
+    <v-container>
+      <v-card
+        class="mx-auto"
+        width="800"
+        >
+
+      <template v-slot:title>
+        Select Category to Register
+      </template>
+
       <v-row class="text-center">
         <v-col>
-          <v-card-text class="pa-10">
-            <v-row style="margin-left: 48%"><h4>Categories</h4> </v-row>
+          <!-- Horizontal line (hr) -->
+          <hr>
+
+          <v-card-text>
+            <v-row style="margin-left: 48%"><h4>Categories</h4>
+            </v-row>
             <v-col style="text-align: center">
-<!--              @change="handleRadioChange"-->
               <v-radio-group
-                @click="openDialog('dialog1')"
+                @change="handleRadioChange"
                 style="margin-left: 35%"
                 v-model="inline"
                 inline
               >
-                <v-radio label="Individual" value="Individual"></v-radio>
-                <v-radio label="Booth" value="Booth"></v-radio>
-                <v-radio label="Forum" value="Forum"></v-radio>
+                <v-radio
+                  label="Individual"
+                  value="Individual"
+                ></v-radio>
+                <v-radio
+                  label="Booth"
+                  value="Booth"
+                ></v-radio>
+                <v-radio
+                  label="Forum"
+                  value="Forum"
+                ></v-radio>
               </v-radio-group>
             </v-col>
           </v-card-text>
         </v-col>
       </v-row>
-      <!-- Horizontal line (hr) -->
-      <hr />
-      <div style="background-color: rgb(242, 242, 242); ruby-position: under">
-        <table>
-          <thead class="custom-th">
-            <tr>
-              <th>S/No</th>
-              <th>Category Name</th>
-              <th>Fees</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <!--          <hr />-->
-          <tbody>
-            <tr>
-              <td>1.</td>
-              <td>Health Worker</td>
-              <td>100,000 TShs.</td>
-              <v-btn type="submit" color="primary" @click="openDialog('dialog2')">View Details</v-btn>
-            </tr>
-            <tr>
-              <td>2.</td>
-              <td>University Student</td>
-              <td>100,000 TShs.</td>
-              <v-btn type="submit" color="primary" @click="openDialog('dialog3')">View Details</v-btn>
-            </tr>
-            <tr>
-              <td>3.</td>
-              <td>Non student</td>
-              <td>150,000 TShs.</td>
-              <v-btn type="submit" color="primary" @click="openDialog('dialog4')">View Details</v-btn>
-            </tr>
-            <tr>
-              <td>4.</td>
-              <td>Foreigner/international</td>
-              <td>£USD 100</td>
-              <v-btn type="submit" color="primary" @click="openDialog('dialog5')">View Details</v-btn>
-            </tr>
-            <tr>
-              <td>5.</td>
-              <td>Booth</td>
-              <td>2,000,000 TSh.</td>
-              <v-btn type="submit" color="primary" @click="openDialog('dialog6')">View Details</v-btn>
-            </tr>
-            <tr>
-              <td>6.</td>
-              <td>Forum</td>
-              <td>10,000,000 TSh.</td>
-              <v-btn type="submit" color="primary" @click="openDialog('dialog7')">View Details</v-btn>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- Horizontal line (hr) -->
-      <hr />
-      <!--      <h4>HELLO</h4>-->
-      <v-dialog v-model="dialogs.dialog1" max-width="800px">
-        <default-alert
-          :show="showDefaultAlert"
-          :message="defaultAlertMessage"
-          :onClose="closeDefaultAlert"
-        />
+      <v-dialog v-model="modalVisible" max-width="800px">
         <v-card>
-          <h3 style="text-align: center; margin-top: 20px">
-            Conference Registration Form
-          </h3>
+          <h3 style="text-align: center; margin-top: 20px">Conference Registration Form</h3>
           <!-- Form Content -->
           <v-form v-model="valid" @submit.prevent="submitForm">
             <v-container fluid fill-height>
@@ -124,7 +76,7 @@
 
                 <v-col cols="12" md="4">
                   <v-select
-                    v-model="sex"
+                    v-model="gender"
                     :items="['Male', 'Female']"
                     label="Select Gender"
                   >
@@ -138,7 +90,7 @@
               <v-row align="center" justify="center">
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="first_name"
+                    v-model="firstname"
                     :rules="nameRules"
                     :counter="10"
                     label="First name"
@@ -149,7 +101,7 @@
 
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="middle_name"
+                    v-model="middlename"
                     :rules="nameRules"
                     :counter="10"
                     label="Middle name"
@@ -160,7 +112,7 @@
 
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="last_name"
+                    v-model="lastname"
                     :rules="nameRules"
                     :counter="10"
                     label="Last name"
@@ -172,7 +124,7 @@
 
               <!-- Email and Phone Number Fields -->
               <v-row align="center" justify="center">
-                <v-col cols="12" md="3">
+                <v-col cols="12" md="6">
                   <v-text-field
                     v-model="email"
                     :rules="emailRules"
@@ -182,29 +134,9 @@
                   ></v-text-field>
                 </v-col>
 
-                <v-col cols="12" md="3">
+                <v-col cols="12" md="6">
                   <v-text-field
-                    v-model="username"
-                    label="Username"
-                    hide-details
-                    required
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="12" md="3">
-                  <v-text-field
-                    v-model="password"
-                    :rules="passwordRules"
-                    label="Password"
-                    hide-details
-                    required
-                    type="password"
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="12" md="3">
-                  <v-text-field
-                    v-model="phone_number"
+                    v-model="phoneNumber"
                     :rules="phoneRules"
                     label="Phone Number"
                     @input="formatPhoneNumber"
@@ -230,7 +162,7 @@
               <v-row class="mt-4">
                 <!-- Cancel Button -->
                 <v-col>
-                  <v-btn @click="closeDialog('dialog1')">Cancel</v-btn>
+                  <v-btn @click="closeModal">Cancel</v-btn>
                 </v-col>
                 <!-- Reset Button -->
                 <v-col>
@@ -238,361 +170,93 @@
                 </v-col>
                 <!-- Submit Button -->
                 <v-col>
-                  <v-btn type="submit" color="primary" @click="postData">Submit</v-btn>
+                  <v-btn type="submit" color="primary">Submit</v-btn>
                 </v-col>
               </v-row>
             </v-container>
           </v-form>
         </v-card>
+<!--        <v-card>-->
+<!--          <v-card-title>Modal Title</v-card-title>-->
+<!--          <v-card-text>-->
+<!--            &lt;!&ndash; Modal content goes here &ndash;&gt;-->
+<!--            This is the content of the modal.-->
+<!--          </v-card-text>-->
+<!--          <v-card-actions>-->
+<!--            <v-btn @click="closeModal">Close</v-btn>-->
+<!--          </v-card-actions>-->
+<!--        </v-card>-->
       </v-dialog>
-
-      <v-dialog v-model="dialogs.dialog2" max-width="500">
-        <v-card>
-          <v-card-title style="background-color: teal;">
-            Package Details
-<!--            <v-btn icon @click="closeDialog('dialog1')">-->
-<!--              <v-icon>mdi-close</v-icon>-->
-<!--            </v-btn>-->
-          </v-card-title>
-
-          <v-card-text>
-            <!-- Content of Dialog 1 goes here -->
-            <ol>
-              <li>Trophy and certificate</li>
-              <li>Inclusion of the organization logo in the official banner for sponsors</li>
-              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
-              <li>Free participation of 4 representatives</li>
-              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
-              <li>2 Booths</li>
+          <div>
+        <h4>PHC Registration Fees</h4>
+            <ol style="text-align: left; margin-left: 50px; margin-bottom: 50px">
+              <li>Health Worker - 100,000 Tsh</li>
+              <li>University Student - 100,000 Tsh</li>
+              <li>Non-Student - 150,000 Tsh</li>
+              <li>Foreigner/International - £USD 100</li>
+              <li>Booth - 2,000,000 Tsh</li>
+              <li>Forum - 10,000,000 Tsh</li>
             </ol>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn @click="closeDialog('dialog2')">Close</v-btn>
-<!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <v-dialog v-model="dialogs.dialog3" max-width="500">
-        <v-card>
-          <v-card-title style="background-color: teal;">
-            Package Details
-<!--            <v-btn icon @click="closeDialog('dialog1')">-->
-<!--              <v-icon>mdi-close</v-icon>-->
-<!--            </v-btn>-->
-          </v-card-title>
-
-          <v-card-text>
-            <!-- Content of Dialog 1 goes here -->
-            <ol>
-              <li>Trophy and certificate</li>
-              <li>Inclusion of the organization logo in the official banner for sponsors</li>
-              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
-              <li>Free participation of 4 representatives</li>
-              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
-              <li>2 Booths</li>
-            </ol>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn @click="closeDialog('dialog3')">Close</v-btn>
-<!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <v-dialog v-model="dialogs.dialog4" max-width="500">
-        <v-card>
-          <v-card-title style="background-color: teal;">
-            Package Details
-            <!--            <v-btn icon @click="closeDialog('dialog1')">-->
-            <!--              <v-icon>mdi-close</v-icon>-->
-            <!--            </v-btn>-->
-          </v-card-title>
-
-          <v-card-text>
-            <!-- Content of Dialog 1 goes here -->
-            <ol>
-              <li>Trophy and certificate</li>
-              <li>Inclusion of the organization logo in the official banner for sponsors</li>
-              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
-              <li>Free participation of 4 representatives</li>
-              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
-              <li>2 Booths</li>
-            </ol>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn @click="closeDialog('dialog4')">Close</v-btn>
-            <!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <v-dialog v-model="dialogs.dialog5" max-width="500">
-        <v-card>
-          <v-card-title style="background-color: teal;">
-            Package Details
-            <!--            <v-btn icon @click="closeDialog('dialog1')">-->
-            <!--              <v-icon>mdi-close</v-icon>-->
-            <!--            </v-btn>-->
-          </v-card-title>
-
-          <v-card-text>
-            <!-- Content of Dialog 1 goes here -->
-            <ol>
-              <li>Trophy and certificate</li>
-              <li>Inclusion of the organization logo in the official banner for sponsors</li>
-              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
-              <li>Free participation of 4 representatives</li>
-              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
-              <li>2 Booths</li>
-            </ol>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn @click="closeDialog('dialog5')">Close</v-btn>
-            <!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <v-dialog v-model="dialogs.dialog6" max-width="500">
-        <v-card>
-          <v-card-title style="background-color: teal;">
-            Package Details
-            <!--            <v-btn icon @click="closeDialog('dialog1')">-->
-            <!--              <v-icon>mdi-close</v-icon>-->
-            <!--            </v-btn>-->
-          </v-card-title>
-
-          <v-card-text>
-            <!-- Content of Dialog 1 goes here -->
-            <ol>
-              <li>Trophy and certificate</li>
-              <li>Inclusion of the organization logo in the official banner for sponsors</li>
-              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
-              <li>Free participation of 4 representatives</li>
-              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
-              <li>2 Booths</li>
-            </ol>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn @click="closeDialog('dialog6')">Close</v-btn>
-            <!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <v-dialog v-model="dialogs.dialog7" max-width="500">
-        <v-card>
-          <v-card-title style="background-color: teal;">
-            Package Details
-            <!--            <v-btn icon @click="closeDialog('dialog1')">-->
-            <!--              <v-icon>mdi-close</v-icon>-->
-            <!--            </v-btn>-->
-          </v-card-title>
-
-          <v-card-text>
-            <!-- Content of Dialog 1 goes here -->
-            <ol>
-              <li>Trophy and certificate</li>
-              <li>Inclusion of the organization logo in the official banner for sponsors</li>
-              <li>Display of advert and a short clip of the organization’s services in the registration portal and conference screens</li>
-              <li>Free participation of 4 representatives</li>
-              <li>2 Minutes talk, in the Main Hall, about their businesses</li>
-              <li>2 Booths</li>
-            </ol>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn @click="closeDialog('dialog7')">Close</v-btn>
-            <!--            <v-btn color="primary" @click="performAction('dialog2')">Perform Action</v-btn>-->
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
-    </v-card>
-    <div>
-      <table>
-        <thead>
-        <tr style="text-align: left">
-          <th>S/No</th>
-          <th>First Name</th>
-          <th>Middle Name</th>
-          <th>Last Name</th>
-          <th>Country</th>
-          <th>Category</th>
-          <th>Email</th>
-          <th>Phone Number</th>
-          <!--            <th>Description</th>-->
-          <!-- Add more headers as needed -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="(item, index) in fetchedData" :key="index">
-          <td>{{ index + 1 }}</td>
-          <td>{{ item.firstname }}</td>
-          <td>{{ item.middlename }}</td>
-          <td>{{ item.lastname }}</td>
-          <td>{{ item.country }}</td>
-          <td>{{ item.category }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.phoneNumber }}</td>
-          <!--            <td>{{ item.description }}</td>-->
-          <!-- Display more properties as needed -->
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </v-container>
+          </div>
+      </v-card>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
-import axios from "axios";
-import DefaultAlert from "@/components/DefaultAlert";
-
 export default {
-  components: {
-    DefaultAlert,
-  },
   data() {
     return {
-      fetchedData: null,
-      // postData: null,
-      dialogs: {
-        dialog1: false,
-        dialog2: false,
-        dialog3: false,
-        dialog4: false,
-        dialog5: false,
-        dialog6: false,
-        dialog7: false,
-      },
-      showDefaultAlert: false,
-      defaultAlertMessage: "",
       valid: true,
       inline: true,
       selectedOption: null,
-      // modalVisible: false,
+      modalVisible: false,
       country: null,
       category: null,
-      // age: null,
-      sex: null,
+      gender: null,
       selectedGender: null,
       selectedCategoryItem: null,
       column: null,
-      first_name: "",
-      middle_name: "",
-      last_name: "",
-      email: "",
-      username: "",
-      password: "",
-      passwordRules: [
-        (v) => !!v || "Password is required",
-        (v) => (v && v.length >= 8) || "Password must be at least 8 characters",
-        (v) => /\d/.test(v) || "Password must contain at least one digit",
-        (v) =>
-          /[A-Z]/.test(v) ||
-          "Password must contain at least one uppercase letter",
-        (v) =>
-          /[a-z]/.test(v) ||
-          "Password must contain at least one lowercase letter",
-      ],
-      hasMinLength: false,
-      hasUpperCase: false,
-      hasLowerCase: false,
-      hasDigit: false,
+      firstname: '',
+      middlename: '',
+      lastname: '',
+      email: '',
       emailRules: [
-        (v) => !!v || "Email is required",
-        (v) => /.+@.+\..+/.test(v) || "Email must be valid",
+        (v) => !!v || 'Email is required',
+        (v) => /.+@.+\..+/.test(v) || 'Email must be valid',
       ],
-      phone_number: "",
+      phoneNumber: '',
       phoneRules: [
-        (v) => !!v || "Phone number is required",
-        (v) => /^\d{10}$/.test(v) || "Phone number must be 10 digits",
+        (v) => !!v || 'Phone number is required',
+        (v) => /^\d{10}$/.test(v) || 'Phone number must be 10 digits',
       ],
-      description: "",
+      description: '',
       nameRules: [],
     };
   },
-  created() {
-    // Call the fetchData method when the component is mounted
-    this.fetchData();
-  },
   methods: {
-    async postData() {
-      try {
-        const response = await axios.post("http://localhost:3200/api/v1/users", {
-          country: this.country,
-          category: this.category,
-          // age: this.age,
-          sex: this.sex,
-          first_name: this.first_name,
-          middle_name: this.middle_name,
-          last_name: this.last_name,
-          email: this.email,
-          username: this.username,
-          password: this.password,
-          phone_number: this.phone_number,
-          description: this.description,
-          // Add more key-value pairs as needed
-        });
-        this.showDefaultAlert = true;
-        this.defaultAlertMessage = "Registered successful!";
-
-        console.log('Response:', response.data);
-
-        // Handle the response data as needed
-      } catch (error) {
-        console.error('Error sending POST request:', error);
-        // Handle the error as needed
-        this.showDefaultAlert = true;
-        this.defaultAlertMessage = "Registration failed!";
-      }
+    handleRadioChange() {
+      // Show the modal when a radio button is selected
+      this.modalVisible = true;
     },
-
-    async fetchData() {
-      try {
-        const response = await axios.get('http://localhost:3200/api/v1/users');
-        this.fetchedData = response.data; // Update this line
-        // console.log('MyData:', JSON.parse(JSON.stringify(this.fetchedData)));
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    },
-
-    openDialog(dialogName) {
-      this.dialogs[dialogName] = true;
-    },
-
-    closeDialog(dialogName) {
-      this.dialogs[dialogName] = false;
-    },
-
-    closeDefaultAlert() {
-      // Logic to handle closing the default alert
-      this.showDefaultAlert = false;
-    },
-
-    performAction(dialogName) {
-      // Logic for performing an action when a button in the dialog is clicked
-      console.log(`Action performed in ${dialogName}`);
+    closeModal() {
+      // Close the modal
+      this.modalVisible = false;
     },
     submitForm() {
       // Your form submission logic here
     },
     resetForm() {
       // Reset form fields
-      this.country = "";
-      this.category = "";
-      // this.age = "";
-      this.sex = "";
-      this.first_name = "";
-      this.middle_name = "";
-      this.last_name = "";
-      this.email = "";
-      this.username = "";
-      this.password = "";
-      this.phone_number = "";
-      this.description = "";
+      this.country = '';
+      this.category = '';
+      this.gender = '';
+      this.firstname = '';
+      this.middlename = '';
+      this.lastname = '';
+      this.email = '';
+      this.phoneNumber = '';
+      this.description = '';
       // Reset validation state if using validation
       this.$refs.submitForm?.resetValidation(); // Replace "form" with the ref attribute of your form element
     },
@@ -607,31 +271,5 @@ export default {
       // Handle phone number formatting logic
     },
   },
-
- };
-
+};
 </script>
-<style>
-/* Add your custom styles here */
-.color-title {
-  color: grey;
-  /* background-color: rgb(242, 242, 242); */
-}
-.custom-th {
-  /* Add your custom styles for the table header cells */
-  padding-right: 1000px; /* Adjust the padding as needed */
-  text-align: left;
-  /* Add any other styles as needed */
-}
-td {
-  padding-right: 100px;
-  text-align: left;
-  /*border: 1px solid #ccc;*/
-}
-
-.centered-line {
-  width: 70%;
-  border: 3px solid grey; /* Adjust thickness as needed */
-  margin: 8px auto; /* Adjust as needed */
-}
-</style>

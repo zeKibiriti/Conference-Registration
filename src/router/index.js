@@ -2,18 +2,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import SlideshowPage from "@/components/SlideshowPage";
 import ConferenceRegistration from "@/components/ConferenceRegistration";
-import Login from "@/components/Login";
-
-import About from "@/components/About";
-import Authentication from "@/components/Authentication"
-import Abstract from "@/components/Abstract";
+import Navigation from "@/components/Navigation";
 
 const routes = [
   {
     path: '/',
     component: () => import('@/layouts/default/Default.vue'),
-
-
     children: [
       {
         path: '',
@@ -21,40 +15,30 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (Home-[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        // component: () => import('@/views/Home.vue'),
-      },
-      {
-        path: '/registration-page',
-        name: "Conference Registration",
-        component: ConferenceRegistration
-      },
-      {
-        path: '/about-page',
-        name: "Conference About",
-        component: About
-      },
-      {
-        path: '/abstract-page',
-        name: "Abstract",
-        component: Abstract
-      },
-      {
-        path: '/login-page',
-        name: "Login",
-        component: Login
-      },
-      {
-        path: '/authentication',
-        name: "Login",
-        component: Authentication
+        component: () => import('@/views/Home.vue'),
       },
     ],
   },
-
+  // {
+  //   path: '/test-page',
+  //   name: "TEST",
+  //   component: TestPage
+  // },
+  {
+    path: '/registration-page',
+    name: "Conference Registration",
+    component: ConferenceRegistration
+  },
   {
     path: '/home-page',
     name: "Home",
     component: SlideshowPage
+  },
+
+  {
+    path: '/navigation-page',
+    name: "Navigation",
+    component: Navigation
   },
 ]
 

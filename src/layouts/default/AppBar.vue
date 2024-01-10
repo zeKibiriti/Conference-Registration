@@ -1,77 +1,40 @@
 <template>
-  <v-app-bar app height="150" elevation="0" color="#f3f5f5">
-    <div class="pl-10">
-      <img class="coat" :src="coat" />
-    </div>
-    <h2 class="color-app pl-10">Conference Portal</h2>
+  <v-app-bar app height="180" color="#64B5F6">
+<!--    <v-btn class="color-app" icon @click="goHome">-->
+<!--      <v-icon>mdi-home</v-icon>-->
+<!--    </v-btn>-->
+    <v-toolbar-title class="color-app">Conference Portal</v-toolbar-title>
 
     <!-- Align buttons to the right -->
     <v-spacer></v-spacer>
-    <v-btn class="color-app" icon @click="goHome">
-      <v-icon style="font-size: 24px">mdi-home</v-icon>
-    </v-btn>
-    <v-btn class="color-app" text @click="handleButtonClick2"
-      ><h3>About</h3></v-btn
-    >
-    <v-btn class="color-app" text @click="handleButtonClick1"
-      ><h3>Register</h3></v-btn
-    >
-    <v-btn class="color-app" text @click="handleButtonAbstract"
-      ><h3>Abstract</h3></v-btn
-    >
-    <v-btn class="color-app" text @click="handleButtonClick3"
-      ><h3>Login</h3></v-btn
-    >
-  </v-app-bar>
 
-  <!-- The registration dialog -->
-  <!--  <v-dialog v-model="registrationDialog" max-width="600">-->
-  <!--    <v-card>-->
-  <!--      &lt;!&ndash; Your registration form or content goes here &ndash;&gt;-->
-  <!--      <v-card-title>Registration Form</v-card-title>-->
-  <!--      <v-card-text>-->
-  <!--        &lt;!&ndash; Your registration form fields go here &ndash;&gt;-->
-  <!--      </v-card-text>-->
-  <!--      <v-card-actions>-->
-  <!--        <v-btn @click="registrationDialog = false">Close</v-btn>-->
-  <!--        &lt;!&ndash; Additional actions if needed &ndash;&gt;-->
-  <!--      </v-card-actions>-->
-  <!--    </v-card>-->
-  <!--  </v-dialog>-->
-  <v-container class="mt-12"> </v-container>
-  <router-view></router-view>
+    <!-- Two text buttons aligned on the right -->
+<!--    <v-btn class="color-app" text @click="handleButtonClick1">Register</v-btn>-->
+<!--    <router-link class="color-app" :to="formattedRoute('/home-page')">Home</router-link>-->
+    <router-link class="color-app" :to="formattedRoute('/registration-page')">Register</router-link>
+<!--    <router-link class="color-app" to="/home-page" >Home</router-link>-->
+    <v-btn text @click="handleButtonClick2"></v-btn>
+  </v-app-bar>
+  <RouterView />
+<!--  <router-view></router-view>-->
 </template>
 
 <script>
 export default {
-  name: "App",
-  data() {
-    return {
-      registrationDialog: false, // Initialize registrationDialog to false
-      coat: "/coat_of_arms.svg.png",
-    };
-  },
   methods: {
-    goHome() {
-      // Use the Vue Router to navigate to the home route
-      this.$router.push({ path: "/" });
-    },
-    handleButtonClick1() {
-      this.$router.push({ path: "/registration-page" });
+    name: "App",
+    formattedRoute(route) {
+      // Replace underscores with another character, e.g., '-'
+      return route.replace(/_/g, '');
+      // or remove underscores altogether
+      // return route.replace(/_/g, '');
+    }
+  }
+};
 
-      // this.registrationDialog = true;
-      // Handle the first button click
-    },
-    handleButtonClick2() {
-      this.$router.push({ path: "/about-page" });
-    },
-    handleButtonClick3() {
-      this.$router.push({ path: "/authentication" });
-    },
-    handleButtonAbstract() {
-      this.$router.push({ path: "/abstract-page" });
-    },
-  },
+const goHome = () => {
+  // Add logic to navigate home
+  console.log("Go home action");
 };
 </script>
 
@@ -88,19 +51,10 @@ export default {
   margin: 10px;
 }
 .link.active {
-  background-color: rgb(0, 174, 255);
+  background-color: red;
   color: white;
 }
 .color-app {
-  color: #616667;
-}
-
-.coat {
-  width: 35%;
-  height: 25%;
-  border-radius: 30%;
-  height: 100px;
-  width: 100px;
-  border: 4px solid rgb(242, 248, 248);
+  color: white;
 }
 </style>
